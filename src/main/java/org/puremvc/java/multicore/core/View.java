@@ -59,8 +59,8 @@ public class View implements IView {
      *
      *Esta implementación de Vista es un Multiton,
      *por lo que no debe llamar al constructor
-     *directly, but instead call the static Multiton
-     *Factory <code>View.getInstance( multitonKey )</code></P>
+     *directamente, pero en su lugar llama al Multiton estático
+     *Fábrica <code>View.getInstance( multitonKey )</code></P>
      *
      *@param key multitonKey
      *@throws Error Error si la instancia para esta clave Multiton ya ha sido construida
@@ -76,11 +76,11 @@ public class View implements IView {
     }
 
     /**
-     * View Singleton Factory method.
+     * Ver el método Singleton Factory.
      *
      * @param key multitonKey
-     * @param factory a factory that accepts the key and returns <code>IView</code>
-     * @return the Multiton instance of <code>View</code>
+     * @param factory una fábrica que acepta la clave y devuelve <code>IView</code>
+     * @return la instancia Multiton de <code>View</code>
      */
     public synchronized static IView getInstance(String key, Function<String, IView> factory) {
         if(instanceMap.get(key) == null) {
