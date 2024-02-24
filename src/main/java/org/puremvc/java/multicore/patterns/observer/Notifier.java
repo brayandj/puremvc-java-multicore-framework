@@ -12,30 +12,30 @@ import org.puremvc.java.multicore.interfaces.INotifier;
 import org.puremvc.java.multicore.patterns.facade.Facade;
 
 /**
- * <P>A Base <code>INotifier</code> implementation.</P>
+ * <P>Una implementación base de <code>INotifier</code>.</P>
  *
- * <P><code>MacroCommand, Command, Mediator</code> and <code>Proxy</code>
- * all have a need to send <code>Notifications</code>.</P>
+ * <P><code>MacroCommand, Command, Mediator</code> y <code>Proxy</code>
+ * todos tienen la necesidad de enviar <code>Notifications</code>.</P>
  *
- * <P>The <code>INotifier</code> interface provides a common method called
- * <code>sendNotification</code> that relieves implementation code of
- * the necessity to actually construct <code>Notifications</code>.</P>
+ * <P>La interfaz <code>INotifier</code> proporciona un método común llamado
+ * <code>sendNotification</code> que libera al código de implementación de
+ * la necesidad de construir realmente instancias de <code>Notifications</code>.</P>
  *
- * <P>The <code>Notifier</code> class, which all of the above mentioned classes
- * extend, provides an initialized reference to the <code>Facade</code>
- * Multiton, which is required for the convienience method
- * for sending <code>Notifications</code>, but also eases implementation as these
- * classes have frequent <code>Facade</code> interactions and usually require
- * access to the facade anyway.</P>
+ * <P>La clase <code>Notifier</code>, de la cual todas las clases mencionadas anteriormente
+ * extienden, proporciona una referencia inicializada al <code>Facade</code>
+ * Multiton, que es necesario para el método de conveniencia
+ * para enviar <code>Notifications</code>, pero también facilita la implementación ya que estas
+ * clases tienen interacciones frecuentes con <code>Facade</code> y generalmente requieren
+ * acceso a la fachada de todos modos.</P>
  *
- * <P>NOTE: In the MultiCore version of the framework, there is one caveat to
- * notifiers, they cannot send notifications or reach the facade until they
- * have a valid multitonKey.</P>
+ * <P>NOTA: En la versión MultiCore del framework, hay una salvedad para
+ * los notificadores, no pueden enviar notificaciones ni alcanzar la fachada hasta que
+ * tengan una clave multiton válida.</P>
  *
- * <P>The multitonKey is set:
- *   * on a Command when it is executed by the Controller
- *   * on a Mediator is registered with the View
- *   * on a Proxy is registered with the Model.</P>
+ * <P>La multitonKey se establece:
+ *   * en un Command cuando es ejecutado por el Controller
+ *   * en un Mediator cuando se registra con la Vista
+ *   * en un Proxy cuando se registra con el Model.</P>
  *
  * @see org.puremvc.java.multicore.patterns.proxy.Proxy Proxy
  * @see Facade Facade
@@ -47,7 +47,7 @@ public class Notifier implements INotifier {
 
     protected String multitonKey;
 
-    protected final String MULTITON_MSG = "multitonKey for this Notifier not yet initialized!";
+    protected final String MULTITON_MSG = "¡La multitonKey para este Notifier aún no está inicializada!";
 
     protected IFacade getFacade() {
         if(multitonKey == null) throw new RuntimeException(MULTITON_MSG);
@@ -55,60 +55,57 @@ public class Notifier implements INotifier {
     }
 
     /**
-     * <P>Create and send an <code>INotification</code>.</P>
+     * <P>Crear y enviar una <code>INotification</code>.</P>
      *
-     * <P>Keeps us from having to construct new INotification
-     * instances in our implementation code.</P>
+     * <P>Nos evita tener que construir nuevas instancias de INotification
+     * en nuestro código de implementación.</P>
      *
-     * @param notificationName the name of the notiification to send
-     * @param body the body of the notification
-     * @param type the type of the notification
+     * @param notificationName el nombre de la notificación a enviar
+     * @param body el cuerpo de la notificación
+     * @param type el tipo de la notificación
      */
     public void sendNotification(String notificationName, Object body, String type) {
         getFacade().sendNotification(notificationName, body, type);
     }
 
     /**
-     * <P>Create and send an <code>INotification</code>.</P>
+     * <P>Crear y enviar una <code>INotification</code>.</P>
      *
-     * <P>Keeps us from having to construct new INotification
-     * instances in our implementation code.</P>
+     * <P>Nos evita tener que construir nuevas instancias de INotification
+     * en nuestro código de implementación.</P>
      *
-     * @param notificationName the name of the notiification to send
-     * @param body the body of the notification
+     * @param notificationName el nombre de la notificación a enviar
+     * @param body el cuerpo de la notificación
      */
     public void sendNotification(String notificationName, Object body) {
         getFacade().sendNotification(notificationName, body);
     }
 
     /**
-     * <P>Create and send an <code>INotification</code>.</P>
+     * <P>Crear y enviar una <code>INotification</code>.</P>
      *
-     * <P>Keeps us from having to construct new INotification
-     * instances in our implementation code.</P>
+     * <P>Nos evita tener que construir nuevas instancias de INotification
+     * en nuestro código de implementación.</P>
      *
-     * @param notificationName the name of the notiification to send
+     * @param notificationName el nombre de la notificación a enviar
      */
     public void sendNotification(String notificationName) {
         getFacade().sendNotification(notificationName);
     }
 
     /**
-     * <P>Initialize this INotifier instance.</P>
+     * <P>Inicializa esta instancia de INotifier.</P>
      *
-     * <P>This is how a Notifier gets its multitonKey.
-     * Calls to sendNotification or to access the
-     * facade will fail until after this method
-     * has been called.</P>
+     * <P>Así es como un Notifier obtiene su multitonKey.
+     * Las llamadas a sendNotification o para acceder a la
+     * fachada fallarán hasta que se haya llamado a este método.</P>
      *
-     * <P>Mediators, Commands or Proxies may override
-     * this method in order to send notifications
-     * or access the Multiton Facade instance as
-     * soon as possible. They CANNOT access the facade
-     * in their constructors, since this method will not
-     * yet have been called.</P>
+     * <P>Mediators, Commands o Proxies pueden anular
+     * este método para enviar notificaciones
+     * o acceder a la instancia Facade Multiton tan pronto como sea posible. NO pueden acceder a la fachada
+     * en sus constructores, ya que este método aún no se habrá llamado.</P>
      *
-     * @param key the multitonKey for this INotifier to use
+     * @param key la multitonKey que este INotifier usará
      */
     public void initializeNotifier(String key) {
         multitonKey = key;

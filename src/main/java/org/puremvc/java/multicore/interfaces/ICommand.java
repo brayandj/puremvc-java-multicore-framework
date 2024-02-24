@@ -8,16 +8,16 @@
 package org.puremvc.java.multicore.interfaces;
 
 /**
- * The interface definition for a PureMVC Command.
+ * <P>La definición de interfaz para un comando PureMVC.</P>
  *
  * @see org.puremvc.java.multicore.interfaces INotification
  */
 public interface ICommand extends INotifier {
 
     /**
-     * <P>Execute the <code>ICommand</code>'s logic to handle a given <code>INotification</code>.</P>
+     * <P>Ejecuta la lógica del <code>ICommand</code> para manejar una <code>INotification</code> dada.</P>
      *
-     * @param notification an <code>INotification</code> to handle.
+     * @param notification una <code>INotification</code> para manejar.
      */
     void execute(INotification notification);
 

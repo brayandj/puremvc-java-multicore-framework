@@ -8,76 +8,80 @@
 package org.puremvc.java.multicore.interfaces;
 
 /**
- * <P>The interface definition for a PureMVC Notification.</P>
+ * <P>La definición de interfaz para una Notificación PureMVC.</P>
  *
- * <P>PureMVC does not rely upon underlying event models such
- * as the one provided with Flash, and ActionScript 3 does
- * not have an inherent event model.</P>
+ * <P>PureMVC no se basa en modelos de eventos subyacentes
+ * como el proporcionado con Flash, y ActionScript 3 no
+ * tiene un modelo de eventos inherente.</P>
  *
- * <P>The Observer Pattern as implemented within PureMVC exists
- * to support event-driven communication between the
- * application and the actors of the MVC triad.</P>
+ * <P>El patrón Observer implementado dentro de PureMVC existe
+ * para soportar la comunicación basada en eventos entre
+ * la aplicación y los actores del tríada MVC.</P>
  *
- * <P>Notifications are not meant to be a replacement for Events
- * in Flex/Flash/AIR. Generally, <code>IMediator</code> implementors
- * place event listeners on their view components, which they
- * then handle in the usual way. This may lead to the broadcast of <code>Notification</code>s to
- * trigger <code>ICommand</code>s or to communicate with other <code>IMediators</code>. <code>IProxy</code> and <code>ICommand</code>
- * instances communicate with each other and <code>IMediator</code>s
- * by broadcasting <code>INotification</code>s.</P>
+ * <P>Las Notificaciones no están destinadas a ser un reemplazo para los Eventos
+ * en Flex/Flash/AIR. Generalmente, los implementadores de <code>IMediator</code>
+ * colocan escuchadores de eventos en sus componentes de vista, los cuales
+ * luego manejan de la manera habitual. Esto puede llevar a la emisión de <code>Notification</code>s para
+ * activar <code>ICommand</code>s o para comunicarse con otros <code>IMediators</code>. <code>IProxy</code> y <code>ICommand</code>
+ * instancias se comunican entre sí y con <code>IMediator</code>s
+ * mediante la emisión de <code>INotification</code>s.</P>
  *
- * <P>A key difference between Flash <code>Event</code>s and PureMVC
- * <code>Notification</code>s is that <code>Event</code>s follow the
- * 'Chain of Responsibility' pattern, 'bubbling' up the display hierarchy
- * until some parent component handles the <code>Event</code>, while
- * PureMVC <code>Notification</code>s follow a 'Publish/Subscribe'
- * pattern. PureMVC classes need not be related to each other in a
- * parent/child relationship in order to communicate with one another
- * using <code>Notification</code>s.</P>
+ * <P>Una diferencia clave entre los <code>Event</code>s de Flash y las <code>Notification</code>s de PureMVC
+ * es que los <code>Event</code>s siguen el patrón 'Chain of Responsibility', 'bubbling' hacia arriba en la jerarquía de visualización
+ * hasta que algún componente padre maneja el <code>Event</code>, mientras que
+ * las <code>Notification</code>s de PureMVC siguen un patrón 'Publish/Subscribe'.
+ * Las clases de PureMVC no necesitan estar relacionadas entre sí en una
+ * relación padre/hijo para comunicarse entre sí
+ * usando <code>Notification</code>s.</P>
  *
  * @see IView IView
  * @see IObserver IObserver
  */
+
 public interface INotification {
 
     /**
-     * <P>Get the name of the <code>INotification</code> instance.
-     * No setter, should be set by constructor only</P>
+     * <P>Obtener el nombre de la instancia de <code>INotification</code>.
+     * No hay setter, solo debe ser establecido por el constructor</P>
      *
-     * @return notification name
+     * @return nombre de la notificación
      */
+
     String getName();
 
     /**
-     * <P>Set the body of the <code>INotification</code> instance</P>
+     * <P>Establecer el cuerpo de la instancia de <code>INotification</code></P>
      *
-     * @param body body
+     * @param body cuerpo
      */
     void setBody(Object body);
 
     /**
-     * <P>Get the body of the <code>INotification</code> instance</P>
+     * <P>Obtener el cuerpo de la instancia de <code>INotification</code></P>
      *
-     * @return body
+     * @return cuerpo
      */
+
     Object getBody();
 
     /**
-     * <P>Set the type of the <code>INotification</code> instance</P>
+     * <P>Establecer el tipo de la instancia de <code>INotification</code></P>
      *
-     * @param type notification type
+     * @param type tipo de notificación
      */
+
     void setType(String type);
 
     /**
-     * <P>Get the type of the <code>INotification</code> instance</P>
+     * <P>Obtener el tipo de la instancia de <code>INotification</code></P>
      *
-     * @return notification type
+     * @return tipo de notificación
      */
+
     String getType();
 
     /**
-     * <P>Get the string representation of the <code>INotification</code> instance</P>
+     * <P>Obtener la representación en cadena de la instancia de <code>INotification</code></P>
      */
     String toString();
 

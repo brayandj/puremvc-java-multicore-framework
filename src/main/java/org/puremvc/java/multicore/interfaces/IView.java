@@ -8,93 +8,101 @@
 package org.puremvc.java.multicore.interfaces;
 
 /**
- * <P>The interface definition for a PureMVC View.</P>
+ * <P>La definición de interfaz para una Vista PureMVC.</P>
  *
- * <P>In PureMVC, <code>IView</code> implementors assume these responsibilities:</P>
+ * <P>En PureMVC, los implementadores de <code>IView</code> asumen estas responsabilidades:</P>
  *
- * <P>In PureMVC, the <code>View</code> class assumes these responsibilities:</P>
+ * <P>En PureMVC, la clase <code>View</code> asume estas responsabilidades:</P>
  *
  * <UL>
- * <LI>Maintain a cache of <code>IMediator</code> instances.</LI>
- * <LI>Provide methods for registering, retrieving, and removing <code>IMediators</code>.</LI>
- * <LI>Managing the observer lists for each <code>INotification</code> in the application.</LI>
- * <LI>Providing a method for attaching <code>IObservers</code> to an <code>INotification</code>'s observer list.</LI>
- * <LI>Providing a method for broadcasting an <code>INotification</code>.</LI>
- * <LI>Notifying the <code>IObservers</code> of a given <code>INotification</code> when it broadcast.</LI>
+ * <LI>Mantener una caché de instancias de <code>IMediator</code>.</LI>
+ * <LI>Proporcionar métodos para registrar, recuperar y eliminar <code>IMediators</code>.</LI>
+ * <LI>Administrar las listas de observadores para cada <code>INotification</code> en la aplicación.</LI>
+ * <LI>Proporcionar un método para adjuntar <code>IObservers</code> a la lista de observadores de una <code>INotification</code>.</LI>
+ * <LI>Proporcionar un método para transmitir una <code>INotification</code>.</LI>
+ * <LI>Notificar a los <code>IObservers</code> de una <code>INotification</code> dada cuando se transmite.</LI>
  * </UL>
  *
  * @see org.puremvc.java.multicore.interfaces.IMediator IMediator
  * @see org.puremvc.java.multicore.interfaces.IObserver IObserver
  * @see org.puremvc.java.multicore.interfaces.INotification INotification
  */
+
 public interface IView {
 
     /**
-     * <P>Register an <code>IObserver</code> to be notified
-     * of <code>INotifications</code> with a given name.</P>
+     * <P>Registra un <code>IObserver</code> para ser notificado
+     * de <code>INotifications</code> con un nombre dado.</P>
      *
-     * @param notificationName the name of the <code>INotifications</code> to notify this <code>IObserver</code> of
-     * @param observer the <code>IObserver</code> to register
+     * @param notificationName el nombre de las <code>INotifications</code> para notificar a este <code>IObserver</code>
+     * @param observer el <code>IObserver</code> para registrar
      */
+
     void registerObserver(String notificationName, IObserver observer);
 
     /**
-     * <P>Remove a group of observers from the observer list for a given Notification name.</P>
+     * <P>Elimina un grupo de observadores de la lista de observadores para un nombre de notificación dado.</P>
      *
-     * @param notificationName which observer list to remove from
-     * @param notifyContext removed the observers with this object as their notifyContext
+     * @param notificationName qué lista de observadores eliminar
+     * @param notifyContext elimina los observadores con este objeto como su notifyContext
      */
+
     void removeObserver(String notificationName, Object notifyContext);
 
     /**
-     * <P>Notify the <code>IObservers</code> for a particular <code>INotification</code>.</P>
+     * <P>Notifica a los <code>IObservers</code> para una <code>INotification</code> particular.</P>
      *
-     * <P>All previously attached <code>IObservers</code> for this <code>INotification</code>'s
-     * list are notified and are passed a reference to the <code>INotification</code> in
-     * the order in which they were registered.</P>
+     * <P>Todos los <code>IObservers</code> previamente adjuntos para esta lista de <code>INotification</code>
+     * son notificados y se les pasa una referencia a la <code>INotification</code> en
+     * el orden en que fueron registrados.</P>
      *
-     * @param notification the <code>INotification</code> to notify <code>IObservers</code> of.
+     * @param notification la <code>INotification</code> para notificar a los <code>IObservers</code>.
      */
+
     void notifyObservers(INotification notification);
 
     /**
-     * <P>Register an <code>IMediator</code> instance with the <code>View</code>.</P>
+     * <P>Registra una instancia de <code>IMediator</code> con la <code>Vista</code>.</P>
      *
-     * <P>Registers the <code>IMediator</code> so that it can be retrieved by name,
-     * and further interrogates the <code>IMediator</code> for its
-     * <code>INotification</code> interests.</P>
+     * <P>Registra el <code>IMediator</code> para que pueda ser recuperado por nombre,
+     * e interroga aún más al <code>IMediator</code> por sus
+     * intereses de <code>INotification</code>.</P>
      *
-     * <P>If the <code>IMediator</code> returns any <code>INotification</code>
-     * names to be notified about, an <code>Observer</code> is created encapsulating
-     * the <code>IMediator</code> instance's <code>handleNotification</code> method
-     * and registering it as an <code>Observer</code> for all <code>INotifications</code> the
-     * <code>IMediator</code> is interested in.</P>
+     * <P>Si el <code>IMediator</code> devuelve algún nombre de <code>INotification</code>
+     * para ser notificado, se crea un <code>Observer</code> encapsulando
+     * el método <code>handleNotification</code> del <code>IMediator</code>
+     * y registrándolo como un <code>Observer</code> para todas las <code>INotifications</code> que el
+     * <code>IMediator</code> está interesado en.</P>
      *
-     * @param mediator a reference to the <code>IMediator</code> instance
+     * @param mediator una referencia a la instancia de <code>IMediator</code>
      */
+
     void registerMediator(IMediator mediator);
 
     /**
-     * <P>Retrieve an <code>IMediator</code> from the <code>View</code>.</P>
+     * <P>Recupera un <code>IMediator</code> de la <code>Vista</code>.</P>
      *
-     * @param mediatorName the name of the <code>IMediator</code> instance to retrieve.
-     * @return the <code>IMediator</code> instance previously registered with the given <code>mediatorName</code>.
+     * @param mediatorName el nombre de la instancia de <code>IMediator</code> para recuperar.
+     * @return la instancia de <code>IMediator</code> previamente registrada con el <code>mediatorName</code> dado.
      */
+
     IMediator retrieveMediator(String mediatorName);
 
     /**
-     * <P>Remove an <code>IMediator</code> from the <code>View</code>.</P>
+     * <P>Elimina un <code>IMediator</code> de la <code>Vista</code>.</P>
      *
-     * @param mediatorName name of the <code>IMediator</code> instance to be removed.
-     * @return the <code>IMediator</code> that was removed from the <code>View</code>
+     * @param mediatorName nombre de la instancia de <code>IMediator</code> que se va a eliminar.
+     * @return el <code>IMediator</code> que se eliminó de la <code>Vista</code>
      */
+
     IMediator removeMediator(String mediatorName);
 
     /**
-     * <P>Check if a Mediator is registered or not</P>
+     * <P>Comprueba si un Mediator está registrado o no</P>
      *
-     * @param mediatorName mediator name
-     * @return whether a Mediator is registered with the given <code>mediatorName</code>.
+     * @param mediatorName nombre del mediador
+     * @return si un Mediator está registrado con el <code>mediatorName</code> dado.
      */
+
     boolean hasMediator(String mediatorName);
 }

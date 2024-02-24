@@ -8,69 +8,74 @@
 package org.puremvc.java.multicore.interfaces;
 
 /**
- * <P>The interface definition for a PureMVC Notifier.</P>
+ * <P>La definición de interfaz para un Notificador PureMVC.</P>
  *
- * <P><code>MacroCommand, Command, Mediator</code> and <code>Proxy</code>
- * all have a need to send <code>Notifications</code>.</P>
+ * <P><code>MacroCommand, Command, Mediator</code> y <code>Proxy</code>
+ * todos tienen la necesidad de enviar <code>Notificaciones</code>.</P>
  *
- * <P>The <code>INotifier</code> interface provides a common method called
- * <code>sendNotification</code> that relieves implementation code of
- * the necessity to actually construct <code>Notifications</code>.</P>
+ * <P>La interfaz <code>INotifier</code> proporciona un método común llamado
+ * <code>sendNotification</code> que libera el código de implementación de
+ * la necesidad de construir realmente <code>Notificaciones</code>.</P>
  *
- * <P>The <code>Notifier</code> class, which all of the above mentioned classes
- * extend, also provides an initialized reference to the <code>Facade</code>
- * Singleton, which is required for the convenience method
- * for sending <code>Notifications</code>, but also eases implementation as these
- * classes have frequent <code>Facade</code> interactions and usually require
- * access to the facade anyway.</P>
+ * <P>La clase <code>Notifier</code>, que todas las clases mencionadas anteriormente
+ * extienden, también proporciona una referencia inicializada al Singleton <code>Facade</code>,
+ * que es necesario para el método de conveniencia
+ * para enviar <code>Notificaciones</code>, pero también facilita la implementación ya que estos
+ * clases tienen interacciones frecuentes con <code>Facade</code> y generalmente requieren
+ * acceso al facade de todos modos.</P>
  *
  * @see IFacade IFacade
  * @see org.puremvc.java.multicore.interfaces.INotification INotification
  */
+
 public interface INotifier {
 
     /**
-     * <P>Send a <code>INotification</code>.</P>
+     * <P>Envía una <code>INotification</code>.</P>
      *
-     * <P>Convenience method to prevent having to construct new
-     * notification instances in our implementation code.</P>
+     * <P>Método de conveniencia para evitar tener que construir nuevas
+     * instancias de notificación en nuestro código de implementación.</P>
      *
-     * @param notificationName the name of the notification to send
-     * @param body the body of the notification
-     * @param type the type of the notification
+     * @param notificationName el nombre de la notificación a enviar
+     * @param body el cuerpo de la notificación
+     * @param type el tipo de la notificación
      */
+
     void sendNotification(String notificationName, Object body, String type);
 
     /**
-     * <P>Send a <code>INotification</code>.</P>
+     * <P>Envía una <code>INotification</code>.</P>
      *
-     * <P>Convenience method to prevent having to construct new
-     * notification instances in our implementation code.</P>
+     * <P>Método de conveniencia para evitar tener que construir nuevas
+     * instancias de notificación en nuestro código de implementación.</P>
      *
-     * @param notificationName the name of the notification to send
-     * @param body the body of the notification
+     * @param notificationName el nombre de la notificación a enviar
+     * @param body el cuerpo de la notificación
      */
+
     void sendNotification(String notificationName, Object body);
 
     /**
-     * <P>Send a <code>INotification</code>.</P>
+     * <P>Envía una <code>INotification</code>.</P>
      *
-     * <P>Convenience method to prevent having to construct new
-     * notification instances in our implementation code.</P>
+     * <P>Método de conveniencia para evitar tener que construir nuevas
+     * instancias de notificación en nuestro código de implementación.</P>
      *
-     * @param notificationName the name of the notification to send
+     * @param notificationName el nombre de la notificación a enviar
      */
+
     void sendNotification(String notificationName);
 
     /**
-     * <P>Initialize this INotifier instance.</P>
+     * <P>Inicializa esta instancia de INotifier.</P>
      *
-     * <P>This is how a Notifier gets its multitonKey.
-     * Calls to sendNotification or to access the
-     * facade will fail until after this method
-     * has been called.</P>
+     * <P>Así es como un Notifier obtiene su multitonKey.
+     * Las llamadas a sendNotification o para acceder al
+     * facade fallarán hasta que después de que este método
+     * haya sido llamado.</P>
      *
-     * @param key the multitonKey for this INotifier to use
+     * @param key el multitonKey para que use este INotifier
      */
+
     void initializeNotifier(String key);
 }

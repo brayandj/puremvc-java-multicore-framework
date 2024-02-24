@@ -10,58 +10,62 @@ package org.puremvc.java.multicore.interfaces;
 import java.util.function.Supplier;
 
 /**
- * <P>The interface definition for a PureMVC Controller.</P>
+ * <P>La definición de interfaz para un Controlador PureMVC.</P>
  *
- * <P>In PureMVC, an <code>IController</code> implementor
- * follows the 'Command and Controller' strategy, and
- * assumes these responsibilities:</P>
+ * <P>En PureMVC, un implementador de <code>IController</code>
+ * sigue la estrategia 'Command and Controller', y
+ * asume estas responsabilidades:</P>
  *
  * <UL>
- * <LI> Remembering which <code>ICommand</code>s
- * are intended to handle which <code>INotifications</code>.</LI>
- * <LI> Registering itself as an <code>IObserver</code> with
- * the <code>View</code> for each <code>INotification</code>
- * that it has an <code>ICommand</code> mapping for.</LI>
- * <LI> Creating a new instance of the proper <code>ICommand</code>
- * to handle a given <code>INotification</code> when notified by the <code>View</code>.</LI>
- * <LI> Calling the <code>ICommand</code>'s <code>execute</code>
- * method, passing in the <code>INotification</code>.</LI>
+ * <LI> Recordar qué <code>ICommand</code>s
+ * están destinados a manejar qué <code>INotifications</code>.</LI>
+ * <LI> Registrarse como un <code>IObserver</code> con
+ * la <code>View</code> para cada <code>INotification</code>
+ * para la cual tiene un mapeo de <code>ICommand</code>.</LI>
+ * <LI> Crear una nueva instancia del <code>ICommand</code> adecuado
+ * para manejar una <code>INotification</code> dada cuando es notificado por la <code>View</code>.</LI>
+ * <LI> Llamar al método <code>execute</code> del <code>ICommand</code>,
+ * pasando la <code>INotification</code>.</LI>
  * </UL>
  *
  * @see org.puremvc.java.multicore.interfaces INotification
  * @see org.puremvc.java.multicore.interfaces ICommand
  */
+
 public interface IController {
 
     /**
-     * <P>Register a particular <code>ICommand</code> class as the handler
-     * for a particular <code>INotification</code>.</P>
+     * <P>Registra una clase <code>ICommand</code> particular como el controlador
+     * para una <code>INotification</code> particular.</P>
      *
-     * @param notificationName the name of the <code>INotification</code>
-     * @param commandSupplier a reference to <code>ICommand</code> supplier
+     * @param notificationName el nombre de la <code>INotification</code>
+     * @param commandSupplier una referencia al proveedor de <code>ICommand</code>
      */
+
     void registerCommand(String notificationName, Supplier<ICommand> commandSupplier);
 
     /**
-     * <P>Execute the <code>ICommand</code> previously registered as the
-     * handler for <code>INotification</code>s with the given notification name.</P>
+     * <P>Ejecuta el <code>ICommand</code> previamente registrado como el
+     * controlador para <code>INotification</code>s con el nombre de notificación dado.</P>
      *
-     * @param notification the <code>INotification</code> to execute the associated <code>ICommand</code> for
+     * @param notification la <code>INotification</code> para ejecutar el <code>ICommand</code> asociado
      */
+
     void executeCommand(INotification notification);
 
     /**
-     * <P>Remove a previously registered <code>ICommand</code> to <code>INotification</code> mapping.</P>
+     * <P>Elimina un mapeo previamente registrado de <code>ICommand</code> a <code>INotification</code>.</P>
      *
-     * @param notificationName the name of the <code>INotification</code> to remove the <code>ICommand</code> mapping for
+     * @param notificationName el nombre de la <code>INotification</code> para eliminar el mapeo de <code>ICommand</code>
      */
+
     void removeCommand(String notificationName);
 
     /**
-     * <P>Check if a Command is registered for a given Notification</P>
+     * <P>Comprueba si un comando está registrado para una notificación dada</P>
      *
-     * @param notificationName notification name
-     * @return whether a Command is currently registered for the given <code>notificationName</code>.
+     * @param notificationName nombre de la notificación
+     * @return si un comando está actualmente registrado para el <code>notificationName</code> dado.
      */
     boolean hasCommand(String notificationName);
 }

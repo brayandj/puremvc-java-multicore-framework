@@ -8,55 +8,57 @@
 package org.puremvc.java.multicore.interfaces;
 
 /**
- * <P>The interface definition for a PureMVC Proxy.</P>
+ * <P>La definición de interfaz para un Proxy de PureMVC.</P>
  *
- * <P>In PureMVC, <code>IProxy</code> implementors assume these responsibilities:</P>
+ * <P>En PureMVC, los implementadores de <code>IProxy</code> asumen estas responsabilidades:</P>
  *
  * <UL>
- * <LI>Implement a common method which returns the name of the Proxy.</LI>
- * <LI>Provide methods for setting and getting the data object.</LI>
+ * <LI>Implementar un método común que devuelva el nombre del Proxy.</LI>
+ * <LI>Proporcionar métodos para establecer y obtener el objeto de datos.</LI>
  * </UL>
  *
- * <P>Additionally, <code>IProxy</code>s typically:</P>
+ * <P>Además, los <code>IProxy</code> típicamente:</P>
  *
  * <UL>
- * <LI>Maintain references to one or more pieces of model data.</LI>
- * <LI>Provide methods for manipulating that data.</LI>
- * <LI>Generate <code>INotifications</code> when their model data changes.</LI>
- * <LI>Expose their name as a <code>public static const</code> called <code>NAME</code>, if they are not instantiated multiple times.</LI>
- * <LI>Encapsulate interaction with local or remote services used to fetch and persist model data.</LI>
+ * <LI>Mantienen referencias a uno o más fragmentos de datos del modelo.</LI>
+ * <LI>Proporcionan métodos para manipular esos datos.</LI>
+ * <LI>Generan <code>INotifications</code> cuando sus datos de modelo cambian.</LI>
+ * <LI>Exponen su nombre como una <code>public static const</code> llamada <code>NAME</code>, si no se instancian varias veces.</LI>
+ * <LI>Encapsulan la interacción con servicios locales o remotos utilizados para recuperar y persistir datos del modelo.</LI>
  * </UL>
  */
+
 public interface IProxy extends INotifier {
 
     /**
-     * <P>Get the Proxy name</P>
+     * <P>Obtener el nombre del Proxy</P>
      *
-     * @return the Proxy instance name
+     * @return el nombre de la instancia del Proxy
      */
     String getProxyName();
 
     /**
-     * <P>Set the data object</P>
+     * <P>Establecer el objeto de datos</P>
      *
-     * @param data the data object
+     * @param data el objeto de datos
      */
     void setData(Object data);
 
     /**
-     * <P>Get the data object</P>
+     * <P>Obtener el objeto de datos</P>
      *
-     * @return the data as type Object
+     * @return los datos como tipo Object
      */
     Object getData();
 
     /**
-     * <P>Called by the Model when the Proxy is registered</P>
+     * <P>Llamado por el Modelo cuando el Proxy está registrado</P>
      */
+
     void onRegister();
 
     /**
-     * <P>Called by the Model when the Proxy is removed</P>
+     * <P>Llamado por el Modelo cuando el Proxy es removido</P>
      */
     void onRemove();
 }

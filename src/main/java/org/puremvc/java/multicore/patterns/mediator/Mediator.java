@@ -12,125 +12,147 @@ import org.puremvc.java.multicore.interfaces.INotification;
 import org.puremvc.java.multicore.patterns.observer.Notifier;
 
 /**
- * <P>A base <code>IMediator</code> implementation.</P>
+ * <P>Una implementación base de <code>IMediator</code>.</P>
  *
  * @see org.puremvc.java.multicore.core.View View
  */
+
 public class Mediator extends Notifier implements IMediator {
 
     /**
-     * <P>The name of the <code>Mediator</code>.</P>
+     * <P>El nombre del <code>Mediator</code>.</P>
      *
-     * <P>Typically, a <code>Mediator</code> will be written to serve
-     * one specific control or group controls and so,
-     * will not have a need to be dynamically named.</P>
+     * <P>Típicamente, un <code>Mediator</code> se escribirá para servir
+     * a un control específico o grupo de controles y, por lo tanto,
+     * no tendrá la necesidad de ser nombrado dinámicamente.</P>
      */
-    public static final String NAME = "Mediator";
 
-    // the mediator name
-    protected String mediatorName;
+    public static final String NAME = "Mediator"; // el nombre del mediador
 
-    // The view component
+    protected String mediatorName; // El componente de vista
+
     protected Object viewComponent;
 
     /**
      * <P>Constructor.</P>
      *
-     * @param mediatorName mediator name
-     * @param viewComponent view component
+     * @param mediatorName nombre del mediador
+     * @param viewComponent componente de vista
      */
+
     public Mediator(String mediatorName, Object viewComponent) {
+
         this.mediatorName = mediatorName != null ? mediatorName : NAME;
+
         this.viewComponent = viewComponent;
+
     }
 
     /**
      * <P>Constructor.</P>
      *
-     * @param mediatorName mediator name
+     * @param mediatorName nombre del mediador
      */
+
     public Mediator(String mediatorName) {
+
         this(mediatorName, null);
+
     }
 
     /**
      * <P>Constructor.</P>
      */
+
     public Mediator() {
+
         this(null, null);
+
     }
 
     /**
-     * <P>List the <code>INotification</code> names this
-     * <code>Mediator</code> is interested in being notified of.</P>
+     * <P>Lista los nombres de <code>INotification</code> en los que este
+     * <code>Mediator</code> está interesado en ser notificado.</P>
      *
-     * @return Array the list of <code>INotification</code> names
+     * @return Array la lista de nombres de <code>INotification</code>
      */
+
     public String[] listNotificationInterests() {
+
         return new String[0];
+
     }
 
     /**
-     * <P>Handle <code>INotification</code>s.</P>
+     * <P>Maneja las <code>INotification</code>s.</P>
      *
-     * <P>Typically this will be handled in a switch statement,
-     * with one 'case' entry per <code>INotification</code>
-     * the <code>Mediator</code> is interested in.</P>
+     * <P>Típicamente esto se manejará en una sentencia switch,
+     * con una entrada 'case' por cada <code>INotification</code>
+     * en la que el <code>Mediator</code> está interesado.</P>
      */
+
     public void handleNotification(INotification notification) {
 
     }
 
     /**
-     * <P>Called by the View when the Mediator is registered</P>
+     * <P>Llamado por la Vista cuando el Mediator se registra</P>
      */
+
     public void onRegister() {
 
     }
 
     /**
-     * <P>Called by the View when the Mediator is removed</P>
+     * <P>Llamado por la Vista cuando el Mediator se elimina</P>
      */
+
     public void onRemove() {
 
     }
 
     /**
-     * <P>Get the name of the <code>Mediator</code>.</P>
+     * <P>Obtener el nombre del <code>Mediator</code>.</P>
      *
-     * @return the Mediator name
+     * @return el nombre del Mediator
      */
+
     public String getMediatorName() {
+
         return mediatorName;
+
     }
 
     /**
-     * <P>Get the <code>Mediator</code>'s view component.</P>
+     * <P>Obtener el componente de vista del <code>Mediator</code>.</P>
      *
-     * <P>Additionally, an implicit getter will usually
-     * be defined in the subclass that casts the view
-     * object to a type, like this:</P>
+     * <P>Adicionalmente, generalmente se definirá un getter implícito
+     * en la subclase que convierte el objeto vista en un tipo, como esto:</P>
      *
      * {@code
-     * public javax.swing.JComboBox getViewComponent()
-     * {
-     *     return viewComponent;
+     * public javax.swing.JComboBox getViewComponent() {
+     *   return viewComponent;
      * }
-     *}
+     * }
      *
-     * @return the view component
+     * @return el componente de vista
      */
+
     public Object getViewComponent() {
+
         return viewComponent;
+
     }
 
     /**
-     * <P>Set the <code>IMediator</code>'s view component.</P>
+     * <P>Establece el componente de vista del <code>IMediator</code>.</P>
      *
-     * @param viewComponent the view component
+     * @param viewComponent el componente de vista
      */
-    public void setViewComponent(Object viewComponent) {
-        this.viewComponent = viewComponent;
-    }
 
+    public void setViewComponent(Object viewComponent) {
+
+        this.viewComponent = viewComponent;
+
+    }
 }

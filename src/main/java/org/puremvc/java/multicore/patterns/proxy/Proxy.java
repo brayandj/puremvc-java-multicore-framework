@@ -11,20 +11,20 @@ import org.puremvc.java.multicore.interfaces.IProxy;
 import org.puremvc.java.multicore.patterns.observer.Notifier;
 
 /**
- * <P>A base <code>IProxy</code> implementation.</P>
+ * <P>Una implementación base de <code>IProxy</code>.</P>
  *
- * <P>In PureMVC, <code>Proxy</code> classes are used to manage parts of the
- * application's data model.</P>
+ * <P>En PureMVC, las clases <code>Proxy</code> se utilizan para administrar partes del
+ * modelo de datos de la aplicación.</P>
  *
- * <P>A <code>Proxy</code> might simply manage a reference to a local data object,
- * in which case interacting with it might involve setting and
- * getting of its data in synchronous fashion.</P>
+ * <P>Un <code>Proxy</code> podría simplemente administrar una referencia a un objeto de datos local,
+ * en cuyo caso interactuar con él podría involucrar establecer y
+ * obtener sus datos de manera sincrónica.</P>
  *
- * <P><code>Proxy</code> classes are also used to encapsulate the application's
- * interaction with remote services to save or retrieve data, in which case,
- * we adopt an asyncronous idiom; setting data (or calling a method) on the
- * <code>Proxy</code> and listening for a <code>Notification</code> to be sent
- * when the <code>Proxy</code> has retrieved the data from the service.</P>
+ * <P>Las clases <code>Proxy</code> también se utilizan para encapsular la interacción de la aplicación con
+ * servicios remotos para guardar o recuperar datos, en cuyo caso,
+ * adoptamos un idioma asíncrono; establecer datos (o llamar a un método) en el
+ * <code>Proxy</code> y escuchando una <code>Notification</code> que se enviará
+ * cuando el <code>Proxy</code> haya recuperado los datos del servicio.</P>
  *
  * @see org.puremvc.java.multicore.core.Model Model
  */
@@ -39,8 +39,8 @@ public class Proxy extends Notifier implements IProxy {
     /**
      * <P>Constructor.</P>
      *
-     * @param proxyName proxy name
-     * @param data data
+     * @param proxyName nombre del proxy
+     * @param data datos
      */
     public Proxy(String proxyName, Object data) {
         this.proxyName = (proxyName != null) ? proxyName : NAME;
@@ -50,7 +50,7 @@ public class Proxy extends Notifier implements IProxy {
     /**
      * <P>Constructor.</P>
      *
-     * @param proxyName proxy name
+     * @param proxyName nombre del proxy
      */
     public Proxy(String proxyName) {
         this(proxyName, null);
@@ -64,38 +64,37 @@ public class Proxy extends Notifier implements IProxy {
     }
 
     /**
-     * <P>Called by the Model when the Proxy is registered</P>
+     * <P>Llamado por el Modelo cuando el Proxy se registra</P>
      */
     public void onRegister() {
 
     }
 
     /**
-     * <P>Called by the Model when the Proxy is removed</P>
+     * <P>Llamado por el Modelo cuando el Proxy se elimina</P>
      */
     public void onRemove() {
 
     }
 
     /**
-     * <P>Get the proxy name</P>
+     * <P>Obtener el nombre del proxy</P>
      */
     public String getProxyName() {
         return proxyName;
     }
 
     /**
-     * <P>Get the data object</P>
+     * <P>Obtener el objeto de datos</P>
      */
     public Object getData() {
         return data;
     }
 
     /**
-     * <P>Set the data object</P>
+     * <P>Establecer el objeto de datos</P>
      */
     public void setData(Object data) {
         this.data = data;
     }
-
 }

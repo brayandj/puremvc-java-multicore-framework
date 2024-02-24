@@ -13,19 +13,19 @@ import org.puremvc.java.multicore.interfaces.IObserver;
 import java.util.function.Consumer;
 
 /**
- * <P>A base <code>IObserver</code> implementation.</P>
+ * <P>Una implementación base de <code>IObserver</code>.</P>
  *
- * <P>An <code>Observer</code> is an object that encapsulates information
- * about an interested object with a method that should
- * be called when a particular <code>INotification</code> is broadcast.</P>
+ * <P>Un <code>Observer</code> es un objeto que encapsula información
+ * sobre un objeto interesado con un método que debería
+ * ser llamado cuando se transmita una <code>INotification</code> en particular.</P>
  *
- * <P>In PureMVC, the <code>Observer</code> class assumes these responsibilities:</P>
+ * <P>En PureMVC, la clase <code>Observer</code> asume estas responsabilidades:</P>
  *
  * <UL>
- * <LI>Encapsulate the notification (callback) method of the interested object.</LI>
- * <LI>Encapsulate the notification context (this) of the interested object.</LI>
- * <LI>Provide methods for setting the notification method and context.</LI>
- * <LI>Provide a method for notifying the interested object.</LI>
+ * <LI>Encapsular el método de notificación (callback) del objeto interesado.</LI>
+ * <LI>Encapsular el contexto de notificación (this) del objeto interesado.</LI>
+ * <LI>Proporcionar métodos para establecer el método de notificación y el contexto.</LI>
+ * <LI>Proporcionar un método para notificar al objeto interesado.</LI>
  * </UL>
  *
  * @see org.puremvc.java.multicore.core.View View
@@ -39,11 +39,11 @@ public class Observer implements IObserver {
     /**
      * <P>Constructor.</P>
      *
-     * <P>The notification method on the interested object should take
-     * one parameter of type <code>INotification</code></P>
+     * <P>El método de notificación en el objeto interesado debería tomar
+     * un parámetro de tipo <code>INotification</code></P>
      *
-     * @param notifyMethod the notification method of the interested object
-     * @param notifyContext the notification context of the interested object
+     * @param notifyMethod el método de notificación del objeto interesado
+     * @param notifyContext el contexto de notificación del objeto interesado
      */
     public Observer(Consumer<INotification> notifyMethod, Object notifyContext) {
         setNotifyMethod(notifyMethod);
@@ -51,60 +51,59 @@ public class Observer implements IObserver {
     }
 
     /**
-     * <P>Compare an object to the notification context.</P>
+     * <P>Compara un objeto con el contexto de notificación.</P>
      *
-     * @param object the object to compare
-     * @return boolean indicating if the object and the notification context are the same
+     * @param object el objeto a comparar
+     * @return booleano que indica si el objeto y el contexto de notificación son el mismo
      */
     public boolean compareNotifyContext(Object object) {
         return object == this.context;
     }
 
     /**
-     * <P>Notify the interested object.</P>
+     * <P>Notifica al objeto interesado.</P>
      *
-     * @param notification the <code>INotification</code> to pass to the interested object's notification method.
+     * @param notification la <code>INotification</code> para pasar al método de notificación del objeto interesado.
      */
     public void notifyObserver(INotification notification) {
         notify.accept(notification);
     }
 
     /**
-     * <P>Get the notification context.</P>
+     * <P>Obtiene el contexto de notificación.</P>
      *
-     * @return the notification context (<code>this</code>) of the interested object.
+     * @return el contexto de notificación (this) del objeto interesado.
      */
     protected Object getNotifyContext() {
         return context;
     }
 
     /**
-     * <P>Set the notification context.</P>
+     * <P>Establece el contexto de notificación.</P>
      *
-     * @param notifyContext the notification context (this) of the interested object.
+     * @param notifyContext el contexto de notificación (this) del objeto interesado.
      */
     public void setNotifyContext(Object notifyContext) {
         this.context = notifyContext;
     }
 
     /**
-     * <P>Get the notification method.</P>
+     * <P>Obtiene el método de notificación.</P>
      *
-     * @return the notification consumer of the interested object.
+     * @return el consumidor de notificación del objeto interesado.
      */
     protected Consumer<INotification> getNotifyMethod() {
         return notify;
     }
 
     /**
-     * <P>Set the notification method.</P>
+     * <P>Establece el método de notificación.</P>
      *
-     * <P>The notification method should take one parameter of type <code>INotification</code>.</P>
+     * <P>El método de notificación debe tomar un parámetro de tipo <code>INotification</code>.</P>
      *
-     * @param notify the notification (callback) method of the interested object.
+     * @param notify el método de notificación (callback) del objeto interesado.
      */
     public void setNotifyMethod(Consumer<INotification> notify) {
         this.notify = notify;
     }
-
 }

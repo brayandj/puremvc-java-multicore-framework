@@ -8,40 +8,38 @@
 package org.puremvc.java.multicore.interfaces;
 
 /**
- * <P>The interface definition for a PureMVC Mediator.</P>
+ * <P>La definición de interfaz para un Mediator de PureMVC.</P>
  *
- * <P>In PureMVC, <code>IMediator</code> implementors assume these responsibilities:</P>
- *
- * <UL>
- * <LI>Implement a common method which returns a list of all <code>INotification</code>s
- * the <code>IMediator</code> has interest in.</LI>
- * <LI>Implement a notification callback method.</LI>
- * <LI>Implement methods that are called when the IMediator is registered or removed from the View.</LI>
- * </UL>
- *
- * <P>Additionally, <code>IMediator</code>s typically:</P>
+ * <P>En PureMVC, los implementadores de <code>IMediator</code> asumen estas responsabilidades:</P>
  *
  * <UL>
- * <LI>Act as an intermediary between one or more view components such as text boxes or
- * list controls, maintaining references and coordinating their behavior.</LI>
- * <LI>In Flash-based apps, this is often the place where event listeners are
- * added to view components, and their handlers implemented.</LI>
- * <LI>Respond to and generate <code>INotifications</code>, interacting with of
- * the rest of the PureMVC app.
+ * <LI>Implementar un método común que devuelva una lista de todas las <code>INotification</code>s
+ * que el <code>IMediator</code> tiene interés en.</LI>
+ * <LI>Implementar un método de devolución de llamada de notificación.</LI>
+ * <LI>Implementar métodos que se llaman cuando el IMediator se registra o se elimina de la Vista.</LI>
  * </UL>
  *
- * <P>When an <code>IMediator</code> is registered with the <code>IView</code>,
- * the <code>IView</code> will call the <code>IMediator</code>'s
- * <code>listNotificationInterests</code> method. The <code>IMediator</code> will
- * return an <code>Array</code> of <code>INotification</code> names which
- * it wishes to be notified about.</P>
+ * <P>Además, los <code>IMediator</code>s típicamente:</P>
  *
- * <P>The <code>IView</code> will then create an <code>Observer</code> object
- * encapsulating that <code>IMediator</code>'s (<code>handleNotification</code>) method
- * and register it as an Observer for each <code>INotification</code> name returned by
+ * <UL>
+ * <LI>Actúan como intermediarios entre uno o más componentes de vista como cuadros de texto o
+ * controles de lista, manteniendo referencias y coordinando su comportamiento.</LI>
+ * <LI>En aplicaciones basadas en Flash, este es a menudo el lugar donde se agregan los escuchadores de eventos a
+ * componentes de vista, e implementan sus manejadores.</LI>
+ * <LI>Responder y generar <code>INotifications</code>, interactuando con el resto de
+ * la aplicación PureMVC.
+ * </UL>
+ *
+ * <P>Cuando un <code>IMediator</code> se registra con la <code>IView</code>,
+ * la <code>IView</code> llamará al método <code>listNotificationInterests</code> del <code>IMediator</code>.
+ * El <code>IMediator</code> devolverá un <code>Array</code> de nombres de <code>INotification</code> que
+ * desea ser notificado.</P>
+ *
+ * <P>La <code>IView</code> luego creará un objeto <code>Observer</code>
+ * encapsulando el método <code>handleNotification</code> del <code>IMediator</code> y lo registrará como un Observer para cada nombre de <code>INotification</code> devuelto por
  * <code>listNotificationInterests</code>.</P>
  *
- * <P>A concrete IMediator implementor usually looks something like this:</P>
+ * <P>Un implementador de IMediator concreto generalmente se ve algo así:</P>
  *
  * <pre>
  * {@code import org.puremvc.java.multicore.patterns.mediator.*;
@@ -100,50 +98,53 @@ package org.puremvc.java.multicore.interfaces;
  *
  * @see org.puremvc.java.multicore.interfaces.INotification INotification
  */
+
 public interface IMediator extends INotifier {
 
     /**
-     * <P>Get the <code>IMediator</code> instance name</P>
+     * <P>Obtener el nombre de la instancia de <code>IMediator</code></P>
      *
-     * @return the <code>IMediator</code> instance name
+     * @return el nombre de la instancia de <code>IMediator</code>
      */
     String getMediatorName();
 
     /**
-     * <P>Get the <code>IMediator</code>'s view component.</P>
+     * <P>Obtener el componente de vista de <code>IMediator</code>.</P>
      *
-     * @return Object the view component
+     * @return Object el componente de vista
      */
     Object getViewComponent();
 
     /**
-     * <P>Set the <code>IMediator</code>'s view component.</P>
+     * <P>Establecer el componente de vista de <code>IMediator</code>.</P>
      *
-     * @param viewComponent the view component
+     * @param viewComponent el componente de vista
      */
+
     void setViewComponent(Object viewComponent);
 
     /**
-     * <P>List <code>INotification</code> interests.</P>
+     * <P>Listar los intereses de <code>INotification</code>.</P>
      *
-     * @return an <code>Array</code> of the <code>INotification</code> names this <code>IMediator</code> has an interest in.
+     * @return un <code>Array</code> de los nombres de <code>INotification</code> en los que este <code>IMediator</code> tiene interés.
      */
     String[] listNotificationInterests();
 
     /**
-     * <P>Handle an <code>INotification</code>.</P>
+     * <P>Manejar una <code>INotification</code>.</P>
      *
-     * @param notification the <code>INotification</code> to be handled
+     * @param notification la <code>INotification</code> que se va a manejar
      */
+
     void handleNotification(INotification notification);
 
     /**
-     * <P>Called by the View when the Mediator is registered</P>
+     * <P>Llamado por la Vista cuando el Mediator es registrado</P>
      */
     void onRegister();
 
     /**
-     * <P>Called by the View when the Mediator is removed</P>
+     * <P>Llamado por la Vista cuando el Mediator es removido</P>
      */
     void onRemove();
 }

@@ -19,53 +19,53 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
 
 /**
- * <P>A Multiton <code>IView</code> implementation.</P>
+ * <P>Una implementación de Multiton de <code>IView</code>.</P>
  *
- * <P>In PureMVC, the <code>View</code> class assumes these responsibilities:</P>
+ * <P>En PureMVC, la clase <code>View</code> asume estas responsabilidades:</P>
  *
  * <UL>
- * <LI>Maintain a cache of <code>IMediator</code> instances.</LI>
- * <LI>Provide methods for registering, retrieving, and removing <code>IMediators</code>.</LI>
- * <LI>Notifiying <code>IMediators</code> when they are registered or removed.</LI>
- * <LI>Managing the observer lists for each <code>INotification</code> in the application.</LI>
- * <LI>Providing a method for attaching <code>IObservers</code> to an <code>INotification</code>'s observer list.</LI>
- * <LI>Providing a method for broadcasting an <code>INotification</code>.</LI>
- * <LI>Notifying the <code>IObservers</code> of a given <code>INotification</code> when it broadcast.</LI>
+ * <LI>Mantener una caché de instancias de <code>IMediator</code>.</LI>
+ * <LI>Proporcionar métodos para registrar, recuperar y eliminar <code>IMediators</code>.</LI>
+ * <LI>Notificar a los <code>IMediators</code> cuando se registran o eliminan.</LI>
+ * <LI>Administrar las listas de observadores para cada <code>INotification</code> en la aplicación.</LI>
+ * <LI>Proporcionar un método para adjuntar <code>IObservers</code> a una lista de observadores de <code>INotification</code>.</LI>
+ * <LI>Proporcionar un método para transmitir una <code>INotification</code>.</LI>
+ * <LI>Notificar a los <code>IObservers</code> de una <code>INotification</code> dada cuando se transmite.</LI>
  * </UL>
  *
  * @see org.puremvc.java.multicore.patterns.mediator.Mediator Mediator
  * @see org.puremvc.java.multicore.patterns.observer.Observer Observer
  * @see org.puremvc.java.multicore.patterns.observer.Notification Notification
  */
+
 public class View implements IView {
 
-    // The Multiton Key for this Core
+    // Clave multitono para este núcleo
     protected String multitonKey;
 
-    // Mapping of Mediator names to Mediator instances
+    // Asignación de nombres de mediadores a instancias de mediadores
     protected ConcurrentMap<String, IMediator> mediatorMap;
 
-    // Mapping of Notification names to Observer lists
+    // Asignación de nombres de notificación a listas de observadores
     protected ConcurrentMap<String, List<IObserver>> observerMap;
 
-    // The Multiton View instanceMap.
+    // La vista multitono instanceMap.
     protected static Map<String, IView> instanceMap = new HashMap<>();
 
-    // Message Constants
+    // Constantes de mensaje
     protected final String MULTITON_MSG = "View instance for this Multiton key already constructed!";
 
     /**
-     * <P>Constructor.</P>
      *
-     * <P>This <code>IView</code> implementation is a Multiton,
-     * so you should not call the constructor
-     * directly, but instead call the static Multiton
-     * Factory method <code>View.getInstance( multitonKey )</code></P>
+     *Esta implementación de Vista es un Multiton,
+     *por lo que no debe llamar al constructor
+     *directly, but instead call the static Multiton
+     *Factory <code>View.getInstance( multitonKey )</code></P>
      *
-     * @param key multitonKey
-     * @throws Error Error if instance for this Multiton key has already been constructed
-     *
+     *@param key multitonKey
+     *@throws Error Error si la instancia para esta clave Multiton ya ha sido construida
      */
+
     public View(String key) {
         if(instanceMap.get(key) != null) new Error(MULTITON_MSG);
         multitonKey = key;
@@ -76,7 +76,7 @@ public class View implements IView {
     }
 
     /**
-     * <P>View Singleton Factory method.</P>
+     * View Singleton Factory method.
      *
      * @param key multitonKey
      * @param factory a factory that accepts the key and returns <code>IView</code>
@@ -90,22 +90,22 @@ public class View implements IView {
     }
 
     /**
-     * <P>Initialize the Singleton View instance.</P>
+     * <P>Inicializa la instancia de Singleton View.</P>
      *
-     * <P>Called automatically by the constructor, this
-     * is your opportunity to initialize the Singleton
-     * instance in your subclass without overriding the
+     * <P>Llamado automáticamente por el constructor, esto
+     * es tu oportunidad de inicializar el Singleton
+     * instancia en su subclase sin anular el
      * constructor.</P>
      */
     protected void initializeView() {
     }
 
     /**
-     * <P>Register an <code>IObserver</code> to be notified
-     * of <code>INotifications</code> with a given name.</P>
+     * <P>Registrar un <code>IObserver</code> para recibir notificaciones
+     * de <code>INotificaciones</code> con un nombre de pila.</P>
      *
-     * @param notificationName the name of the <code>INotifications</code> to notify this <code>IObserver</code> of
-     * @param observer the <code>IObserver</code> to register
+     * @param notificationName el nombre de <code>INotifications</code> para notificar a este <code>IObserver</code> de
+     * @param observer el <code>IObserver</code> para registrarse
      */
     public void registerObserver(String notificationName, IObserver observer) {
         if(observerMap.get(notificationName) != null) {
@@ -116,131 +116,131 @@ public class View implements IView {
     }
 
     /**
-     * <P>Notify the <code>IObservers</code> for a particular <code>INotification</code>.</P>
+     * <P>Notificar a los <code>IObservers</code> para una <code>IOnotificación</code> en particular.</P>
      *
-     * <P>All previously attached <code>IObservers</code> for this <code>INotification</code>'s
-     * list are notified and are passed a reference to the <code>INotification</code> in
-     * the order in which they were registered.</P>
+     * <P>Todos los <code>IObservers</code> previamente adjuntos para esta <code>INotification</code>
+     * Se notifica la lista y se les pasa una referencia a <code>INotification</code> en
+     * el orden en que fueron registrados.</P>
      *
-     * @param notification the <code>INotification</code> to notify <code>IObservers</code> of.
+     * @param notification la <code>INotification</code> para notificar a <code>IObservers</code>.
      */
     public void notifyObservers(INotification notification) {
         if(observerMap.get(notification.getName()) != null) {
 
-            // Get a reference to the observers list for this notification name
+            // Obtener una referencia a la lista de observadores para este nombre de notificación
             List<IObserver> observers_ref = observerMap.get(notification.getName());
 
-            // Copy observers from reference array to working array,
-            // since the reference array may change during the notification loop
+            // Copiar observadores del array de referencia al array de trabajo,
+            // ya que el array de referencia puede cambiar durante el bucle de notificación
             List<IObserver> observers = new ArrayList<>(observers_ref);
 
-            // Notify Observers from the working array
+            // Notificar Observadores de la matriz de trabajo
             observers.forEach(observer -> observer.notifyObserver(notification));
         }
     }
 
     /**
-     * <P>Remove the observer for a given notifyContext from an observer list for a given Notification name.</P>
+     * <P>Eliminar el observador para un notifyContext dado de una lista de observadores para un nombre de Notificación dado.</P>
      *
-     * @param notificationName which observer list to remove from
-     * @param notifyContext remove the observer with this object as its notifyContext
+     * @param notificationName de qué lista de observadores eliminar
+     * @param notifyContext eliminar el observador con este objeto como su notifyContext
      */
     public void removeObserver(String notificationName, Object notifyContext) {
-        // the observer list for the notification under inspection
+        // la lista de observadores para la notificación objeto de inspección
         List<IObserver> observers = observerMap.get(notificationName);
 
-        // find the observer for the notifyContext
+        // encontrar el observador para el notifyContext
         for(int i=0; i<observers.size(); i++) {
             if(observers.get(i).compareNotifyContext(notifyContext) == true) {
-                // there can only be one Observer for a given notifyContext
-                // in any given Observer list, so remove it and break
+                // sólo puede haber un Observador para un notifyContext dado
+                // en cualquier lista de observadores, así que elimínalo y rompe
                 observers.remove(i);
                 break;
             }
         }
 
-        // Also, when a Notification's Observer list length falls to
-        // zero, delete the notification key from the observer map
+        // Además, cuando la longitud de la lista de observadores de una notificación llega a
+        // cero, elimina la clave de notificación del mapa de observadores
         if(observers.size() == 0) {
             observerMap.remove(notificationName);
         }
     }
 
     /**
-     * <P>Register an <code>IMediator</code> instance with the <code>View</code>.</P>
+     * <P>Registrar una instancia de <code>IMediator</code> con la <code>Ver</code>.</P>
      *
-     * <P>Registers the <code>IMediator</code> so that it can be retrieved by name,
-     * and further interrogates the <code>IMediator</code> for its
-     * <code>INotification</code> interests.</P>
+     * <P>Registra el <code>IMediator</code> para que pueda recuperarse por nombre,
+     * y además interroga al <code>IMediator</code> por su
+     * Intereses de <code>INotificación</code>.</P>
      *
-     * <P>If the <code>IMediator</code> returns any <code>INotification</code>
-     * names to be notified about, an <code>Observer</code> is created encapsulating
-     * the <code>IMediator</code> instance's <code>handleNotification</code> method
-     * and registering it as an <code>Observer</code> for all <code>INotifications</code> the
-     * <code>IMediator</code> is interested in.</P>
+     * <P>Si el <code>IMediator</code> devuelve cualquier <code>INotificación</code>
+     * nombres sobre los que se notificará, se crea un <code>Observer</code> encapsulando
+     * el método <code>handleNotification</code> de la instancia <code>IMediator</code>
+     * y registrarlo como <code>Observador</code> para todas las <code>INotificaciones</code> del
+     * <code>IMediator</code> está interesado.</P>
      *
-     * @param mediator a reference to the <code>IMediator</code> instance
+     * @param mediator una referencia a la instancia <code>IMediator</code>
      */
     public void registerMediator(IMediator mediator) {
-        // do not allow re-registration (you must to removeMediator fist)
+        // no permite volver a registrarse (debe eliminar el puño Mediator)
         if(mediatorMap.get(mediator.getMediatorName()) != null) return;
 
         mediator.initializeNotifier(multitonKey);
 
-        // Register the Mediator for retrieval by name
+        // Registrar la Mediadora para su recuperación por nombre
         mediatorMap.put(mediator.getMediatorName(), mediator);
 
-        // Get Notification interests, if any.
+        // Obtener intereses de notificación, si los hubiera.
         String[] interests = mediator.listNotificationInterests();
 
-        // Register Mediator as an observer for each notification of interests
+        // Registrar Mediador como observador para cada notificación de intereses
         if(interests.length > 0) {
-            // Create Observer referencing this mediator's handlNotification method
+            // Crear observador haciendo referencia al método handlNotification de este mediador
             IObserver observer = new Observer(mediator::handleNotification, mediator);
 
-            // Register Mediator as Observer for its list of Notification interests
+            // Registrar al Mediador como Observador para su lista de intereses de Notificación
             for(int i=0; i<interests.length; i++) {
                 registerObserver(interests[i], observer);
             }
         }
 
-        // alert the mediator that it has been registered
+        // alerta al mediador que ha sido registrado
         mediator.onRegister();
     }
 
     /**
-     * <P>Retrieve an <code>IMediator</code> from the <code>View</code>.</P>
+     * <P>Recuperar un <code>IMediator</code> de la <code>Ver</code>.</P>
      *
-     * @param mediatorName the name of the <code>IMediator</code> instance to retrieve.
-     * @return the <code>IMediator</code> instance previously registered with the given <code>mediatorName</code>.
+     * @param mediatorName el nombre de la instancia <code>IMediator</code> que se recuperará.
+     * @return la instancia <code>IMediator</code> registrada previamente con el <code>mediatorName</code> dado.
      */
     public IMediator retrieveMediator(String mediatorName) {
         return mediatorMap.get(mediatorName);
     }
 
     /**
-     * <P>Remove an <code>IMediator</code> from the <code>View</code>.</P>
+     * <P>Eliminar un <code>IMediator</code> de la <code>Vista</code>.</P>
      *
-     * @param mediatorName name of the <code>IMediator</code> instance to be removed.
-     * @return the <code>IMediator</code> that was removed from the <code>View</code>
+     * @param mediatorName nombre de la instancia <code>IMediator</code> que se eliminará.
+     * @return el <code>IMediator</code> que se eliminó de la <code>View</code>
      */
     public IMediator removeMediator(String mediatorName) {
-        // Retrieve the named mediator
+        // Recuperar la mediadora nombrada
         IMediator mediator = mediatorMap.get(mediatorName);
 
         if(mediator != null) {
-            // for every notification this mediator is interested in...
+            // por cada notificación que le interese a este mediador...
             String[] interests = mediator.listNotificationInterests();
             for(int i=0; i<interests.length; i++) {
-                // remove the observer linking the mediator
-                // to the notification interest
+                // eliminar el observador que vincula al mediador
+                // al interés de notificación
                 removeObserver(interests[i], mediator);
             }
 
-            // remove the mediator from the map
+            // eliminar la mediadora del mapa
             mediatorMap.remove(mediatorName);
 
-            // alert the mediator that it has been removed
+            // alerta al mediador que ha sido eliminado
             mediator.onRemove();
         }
 
@@ -248,19 +248,19 @@ public class View implements IView {
     }
 
     /**
-     * <P>Check if a Mediator is registered or not</P>
+     * <P>Comprueba si un Mediador está registrado o no</P>
      *
-     * @param mediatorName mediator name
-     * @return whether a Mediator is registered with the given <code>mediatorName</code>.
+     * @param mediatorName nombre del mediador
+     * @return si un Mediador está registrado con el <code>mediatorName</code> dado.
      */
     public boolean hasMediator(String mediatorName) {
         return  mediatorMap.containsKey(mediatorName);
     }
 
     /**
-     * <P>Remove an IView instance</P>
+     * <P>Eliminar una instancia de IView</P>
      *
-     * @param key of IView instance to remove
+     * Clave @param de la instancia de IView para eliminar
      */
     public synchronized static void removeView(String key) {
         instanceMap.remove(key);

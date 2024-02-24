@@ -10,70 +10,71 @@ package org.puremvc.java.multicore.interfaces;
 import java.util.function.Consumer;
 
 /**
- * <P>The interface definition for a PureMVC Observer.</P>
+ * <P>La definición de interfaz para un Observador PureMVC.</P>
  *
- * <P>In PureMVC, <code>IObserver</code> implementors assume these responsibilities:</P>
+ * <P>En PureMVC, los implementadores de <code>IObserver</code> asumen estas responsabilidades:</P>
  *
  * <UL>
- * <LI>Encapsulate the notification (callback) method of the interested object.</LI>
- * <LI>Encapsulate the notification context (this) of the interested object.</LI>
- * <LI>Provide methods for setting the interested object' notification method and context.</LI>
- * <LI>Provide a method for notifying the interested object.</LI>
+ * <LI>Encapsular el método de notificación (callback) del objeto interesado.</LI>
+ * <LI>Encapsular el contexto de notificación (esto) del objeto interesado.</LI>
+ * <LI>Proporcionar métodos para establecer el método de notificación y el contexto del objeto interesado.</LI>
+ * <LI>Proporcionar un método para notificar al objeto interesado.</LI>
  * </UL>
  *
- * <P>PureMVC does not rely upon underlying event
- * models such as the one provided with Flash,
- * and ActionScript 3 does not have an inherent
- * event model.</P>
+ * <P>PureMVC no se basa en modelos de eventos subyacentes
+ * como el proporcionado con Flash,
+ * y ActionScript 3 no tiene un modelo de eventos inherente.</P>
  *
- * <P>The Observer Pattern as implemented within
- * PureMVC exists to support event driven communication
- * between the application and the actors of the
- * MVC triad.</P>
+ * <P>El Patrón Observador tal como se implementa dentro
+ * PureMVC existe para soportar la comunicación basada en eventos
+ * entre la aplicación y los actores del
+ * tríada MVC.</P>
  *
- * <P>An Observer is an object that encapsulates information
- * about an interested object with a notification method that
- * should be called when an <code>INotification</code> is broadcast. The Observer then
- * acts as a proxy for notifying the interested object.</P>
+ * <P>Un Observador es un objeto que encapsula información
+ * sobre un objeto interesado con un método de notificación que
+ * debería ser llamado cuando se emite una <code>INotification</code>. El Observador entonces
+ * actúa como un proxy para notificar al objeto interesado.</P>
  *
- * <P>Observers can receive <code>Notification</code>s by having their
- * <code>notifyObserver</code> method invoked, passing
- * in an object implementing the <code>INotification</code> interface, such
- * as a subclass of <code>Notification</code>.</P>
+ * <P>Los Observadores pueden recibir <code>Notification</code>s al tener su
+ * método <code>notifyObserver</code> invocado, pasando
+ * en un objeto que implementa la interfaz <code>INotification</code>, tal
+ * como una subclase de <code>Notification</code>.</P>
  *
  * @see IView IView
  * @see org.puremvc.java.multicore.interfaces.INotification INotification
  */
+
 public interface IObserver {
 
     /**
-     * <P>Set the notification method.</P>
+     * <P>Establece el método de notificación.</P>
      *
-     * <P>The notification method should take one parameter of type <code>INotification</code></P>
+     * <P>El método de notificación debe tomar un parámetro de tipo <code>INotification</code></P>
      *
-     * @param notifyMethod the notification consumer method of the interested object
+     * @param notifyMethod el método consumidor de notificación del objeto interesado
      */
+
     void setNotifyMethod(Consumer<INotification> notifyMethod);
 
     /**
-     * <P>Set the notification context.</P>
+     * <P>Establece el contexto de notificación.</P>
      *
-     * @param notifyContext the notification context (this) of the interested object
+     * @param notifyContext el contexto de notificación (this) del objeto interesado
      */
     void setNotifyContext(Object notifyContext);
 
     /**
-     * <P>Notify the interested object.</P>
+     * <P>Notifica al objeto interesado.</P>
      *
-     * @param notification the <code>INotification</code> to pass to the interested object's notification method
+     * @param notification el <code>INotification</code> para pasar al método de notificación del objeto interesado
      */
     void notifyObserver(INotification notification);
 
     /**
-     * <P>Compare the given object to the notificaiton context object.</P>
+     * <P>Compara el objeto dado con el objeto de contexto de notificación.</P>
      *
-     * @param object the object to compare.
-     * @return boolean indicating if the notification context and the object are the same.
+     * @param object el objeto a comparar.
+     * @return booleano que indica si el contexto de notificación y el objeto son iguales.
      */
     boolean compareNotifyContext(Object object);
 

@@ -21,30 +21,30 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
- * <P>A Multiton <code>IController</code> implementation.</P>
+ * <P>Una implementación <code>IController</code> de Multiton.</P>
  *
- * <P>In PureMVC, the <code>Controller</code> class follows the
- * 'Command and Controller' strategy, and assumes these
- * responsibilities:</P>
+ * <P>En PureMVC, la clase <code>Controller</code> sigue el
+ * Estrategia de 'Comando y Controlador', y asume estos
+ * responsabilidades:</P>
  *
  * <UL>
- * <LI> Remembering which <code>ICommand</code>
- * are intended to handle which <code>INotifications</code>.</LI>
- * <LI> Registering itself as an <code>IObserver</code> with
- * the <code>View</code> for each <code>INotification</code>
- * that it has an <code>ICommand</code> mapping for.</LI>
- * <LI> Creating a new instance of the proper <code>ICommand</code>
- * to handle a given <code>INotification</code> when notified by the <code>View</code>.</LI>
- * <LI> Calling the <code>ICommand</code>'s <code>execute</code>
- * method, passing in the <code>INotification</code>.</LI>
+ * <LI> Recordando qué <code>ICommand</code>
+ * están destinados a manejar qué <code>INotificaciones</code>.</LI>
+ * <LI> Registrarse como <code>IObserver</code> con
+ * la <code>Ver</code> para cada <code>INotificación</code>
+ * para el que tiene una asignación <code>ICommand</code>.</LI>
+ * <LI> Creando una nueva instancia del <code>ICommand</code> adecuado
+ * para manejar una <code>INotificación</code> determinada cuando la <code>Ver</code> la notifica.</LI>
+ * <LI> Llamando al <code>ejecutar</code> del <code>ICommand</code>
+ * método, pasando el <code>INotification</code>.</LI>
  * </UL>
  *
- * <P>Your application must register <code>ICommands</code> with the
- * Controller.</P>
+ * <P>Su aplicación debe registrar <code>ICommands</code> con el
+ * Controlador.</P>
  *
- * <P>The simplest way is to subclass <code>Facade</code>,
- * and use its <code>initializeController</code> method to add your
- * registrations.</P>
+ * <P>La forma más sencilla es subclasificar <code>Fachada</code>,
+ * y use su método <code>initializeController</code> para agregar su
+ * inscripciones.</P>
  *
  * @see View View
  * @see org.puremvc.java.multicore.patterns.observer.Observer Observer
@@ -55,32 +55,32 @@ import java.util.function.Supplier;
 
 public class Controller implements IController {
 
-    // Local reference to View
+    // Referencia local a Ver
     protected IView view;
 
-    // Mapping of Notification names to Command Supplier references
+    // Asignación de nombres de notificaciones a referencias de proveedores de comandos
     protected ConcurrentMap<String, Supplier<ICommand>> commandMap;
 
-    // The Multiton Key for this Core
+    // La clave Multiton para este núcleo
     protected String multitonKey;
 
-    // The Multiton Controller instanceMap.
+    // El mapa de instancias del controlador Multiton.
     protected static Map<String, IController> instanceMap = new HashMap<>();
 
-    // Message Constants
+    // Constantes de mensaje
     protected final String MULTITON_MSG = "Controller instance for this Multiton key already constructed!";
 
     /**
      * <P>Constructor.</P>
      *
-     * <P>This <code>IController</code> implementation is a Multiton,
-     * so you should not call the constructor
-     * directly, but instead call the static Factory method,
-     * passing the unique key and a supplier for this instance
-     * {@code Controller.getInstance(multitonKey, () -> new Controller(multitonKey))}</P>
+     * <P>Esta implementación de <code>IController</code> es un Multiton,
+     * entonces no deberías llamar al constructor
+     * directamente, pero en su lugar llama al método estático Factory,
+     * pasando la clave única y un proveedor para esta instancia
+     * {@code Controller.getInstance(multitonKey, () -> nuevo controlador(multitonKey))}</P>
      *
      * @param key multitonKey
-     * @throws Error Error if instance for this Multiton key has already been constructed
+     * @throws Error Error si la instancia para esta clave Multiton ya se ha construido
      *
      */
     public Controller(String key) {
@@ -92,20 +92,20 @@ public class Controller implements IController {
     }
 
     /**
-     * <P>Initialize the Multiton <code>Controller</code> instance.</P>
+     * <P>Inicializa la instancia del <code>Controller</code> de Multiton.</P>
      *
-     * <P>Called automatically by the constructor.</P>
+     * <P>Llamado automáticamente por el constructor.</P>
      *
-     * <P>Note that if you are using a subclass of <code>View</code>
-     * in your application, you should <i>also</i> subclass <code>Controller</code>
-     * and override the <code>initializeController</code> method in the
-     * following way:</P>
+     * <P>Tenga en cuenta que si está utilizando una subclase de <code>Ver</code>
+     * en su aplicación, debe <i>también</i> subclase <code>Controller</code>
+     * y anular el método <code>initializeController</code> en el
+     *de la siguiente manera:</P>
      *
      * <pre>
-     * {@code // ensure that the Controller is talking to my IView implementation
-     * void public initializeController(  )
+     * {@code // asegurar que el controlador esté hablando con mi implementación de IView
+     * anular el controlador de inicialización público ()
      * {
-     *     view = MyView.getInstance(multitonKey, () -> new MyView(multitonKey));
+     * ver = MyView.getInstance(multitonKey, () -> new MyView(multitonKey));
      * }
      * }
      * </pre>
@@ -115,11 +115,11 @@ public class Controller implements IController {
     }
 
     /**
-     * <P><code>Controller</code> Multiton Factory method.</P>
+     * <P><code>Controlador</code>Método Multiton Factory.</P>
      *
      * @param key multitonKey
-     * @param factory a factory that accepts the key and returns <code>IController</code>
-     * @return the Multiton instance of <code>Controller</code>
+     * @param factory una fábrica que acepta la clave y devuelve <code>IController</code>
+     * @return la instancia Multiton de <code>Controller</code>
      */
     public synchronized static IController getInstance(String key, Function<String, IController> factory) {
         if(instanceMap.get(key) == null) {
@@ -129,10 +129,10 @@ public class Controller implements IController {
     }
 
     /**
-     * <P>If an <code>ICommand</code> has previously been registered
-     * to handle a the given <code>INotification</code>, then it is executed.</P>
+     * <P>Si previamente se ha registrado un <code>ICommand</code>
+     * para manejar una <code>INotificación</code> dada, luego se ejecuta.</P>
      *
-     * @param notification an <code>INotification</code>
+     * @param notification y <code>INotification</code>
      */
     public void executeCommand(INotification notification) {
         Supplier<ICommand> commandSupplier = commandMap.get(notification.getName());
@@ -143,18 +143,18 @@ public class Controller implements IController {
     }
 
     /**
-     * <P>Register a particular <code>ICommand</code> class as the handler
-     * for a particular <code>INotification</code>.</P>
+     * <P>Registrar una clase <code>ICommand</code> particular como controlador
+     * para una <code>INotificación</code> en particular.</P>
      *
-     * <P>If an <code>ICommand</code> has already been registered to
-     * handle <code>INotification</code>s with this name, it is no longer
-     * used, the new <code>ICommand</code> is used instead.</P>
+     * <P>Si ya se ha registrado un <code>ICommand</code>
+     * manejar <code>INotification</code> con este nombre, ya no es
+     * usado, en su lugar se usa el nuevo <code>ICommand</code>.</P>
      *
-     * <P>The Observer for the new ICommand is only created if this the
-     * first time an ICommand has been regisered for this Notification name.</P>
+     * <P>El observador para el nuevo ICommand sólo se crea si este es el
+     * primera vez que se registra un ICommand para este nombre de notificación.</P>
      *
-     * @param notificationName the name of the <code>INotification</code>
-     * @param commandSupplier a reference to <code>ICommand</code> supplier
+     * @param notificationName el nombre de la <code>INotification</code>
+     * @param commandSupplier una referencia al proveedor <code>ICommand</code>
      */
     public void registerCommand(String notificationName, Supplier<ICommand> commandSupplier) {
         if(commandMap.get(notificationName) == null) {
@@ -164,35 +164,35 @@ public class Controller implements IController {
     }
 
     /**
-     * <P>Remove a previously registered <code>ICommand</code> to <code>INotification</code> mapping.</P>
+     * <P>Eliminar una asignación <code>ICommand</code> a <code>INotification</code> previamente registrada.</P>
      *
-     * @param notificationName the name of the <code>INotification</code> to remove the <code>ICommand</code> mapping for
+     * @param notificationName el nombre de la <code>INotification</code> para eliminar la asignación <code>ICommand</code> para
      */
     public void removeCommand(String notificationName) {
-        // if the Command is registered...
+        // si el Comando está registrado...
         if(hasCommand(notificationName)) {
-            // remove the observer
+            // eliminar a la observadora
             view.removeObserver(notificationName, this);
 
-            // remove the command
+            // eliminar el comando
             commandMap.remove(notificationName);
         }
     }
 
     /**
-     * <P>Check if a Command is registered for a given Notification</P>
+     * <P>Compruebe si un Comando está registrado para una Notificación determinada</P>
      *
-     * @param notificationName notification name
-     * @return whether a Command is currently registered for the given <code>notificationName</code>.
+     * @param notificationName nombre de notificación
+     * @return si un comando está actualmente registrado para el <code>notificationName</code> dado.
      */
     public boolean hasCommand(String notificationName) {
         return commandMap.get(notificationName) != null;
     }
 
     /**
-     * <P>Remove an IController instance</P>
+     * <P>Eliminar una instancia de IController</P>
      *
-     * @param key multitonKey of IController instance to remove
+     * @param key multitonKey de la instancia de IController para eliminar
      */
     public synchronized static void removeController(String key) {
         instanceMap.remove(key);
