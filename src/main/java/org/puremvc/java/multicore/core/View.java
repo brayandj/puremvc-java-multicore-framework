@@ -44,6 +44,9 @@ public class View implements IView {
     protected String multitonKey;
 
     // Asignación de nombres de mediadores a instancias de mediadores
+    // ConcurrentMap define una colección de mapas con clave-valor
+    // donde una clace está asociado a un valor y es utilizada para 
+    //proporcinar métodos para agregar, eliminar u recuperar elementos de un mapa.
     protected ConcurrentMap<String, IMediator> mediatorMap;
 
     // Asignación de nombres de notificación a listas de observadores
