@@ -37,7 +37,9 @@ import java.util.function.Supplier;
  */
 
 public class MacroCommand extends Notifier implements ICommand {
-
+    /**Un vector de un supplier que es una interfaz que representa una función
+     * no toma argumentos y devuelve un resultado, en este caso una instancia 
+     * de la clase que implementa ICommand
     private Vector<Supplier<ICommand>> subCommands;
 
     /**
