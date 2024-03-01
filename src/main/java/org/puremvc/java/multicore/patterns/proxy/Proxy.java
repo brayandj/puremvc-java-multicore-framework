@@ -11,20 +11,20 @@ import org.puremvc.java.multicore.interfaces.IProxy;
 import org.puremvc.java.multicore.patterns.observer.Notifier;
 
 /**
- * <P>Una implementación base de <code>IProxy</code>.</P>
- *
- * <P>En PureMVC, las clases <code>Proxy</code> se utilizan para administrar partes del
+ * Una implementación base de Proxy
+ *<P>
+ * En PureMVC, las clases Proxy se utilizan para administrar partes del
  * modelo de datos de la aplicación.</P>
  *
- * <P>Un <code>Proxy</code> podría simplemente administrar una referencia a un objeto de datos local,
+ * <P>Un Proxy podría simplemente administrar una referencia a un objeto de datos local,
  * en cuyo caso interactuar con él podría involucrar establecer y
  * obtener sus datos de manera sincrónica.</P>
  *
- * <P>Las clases <code>Proxy</code> también se utilizan para encapsular la interacción de la aplicación con
+ * <P>Las clases Proxy también se utilizan para encapsular la interacción de la aplicación con
  * servicios remotos para guardar o recuperar datos, en cuyo caso,
  * adoptamos un idioma asíncrono; establecer datos (o llamar a un método) en el
- * <code>Proxy</code> y escuchando una <code>Notification</code> que se enviará
- * cuando el <code>Proxy</code> haya recuperado los datos del servicio.</P>
+ * Proxy y escuchando una Notification que se enviará
+ * cuando el Proxy haya recuperado los datos del servicio.</P>
  *
  * @see org.puremvc.java.multicore.core.Model Model
  */

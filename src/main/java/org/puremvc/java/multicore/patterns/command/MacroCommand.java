@@ -15,21 +15,21 @@ import java.util.Vector;
 import java.util.function.Supplier;
 
 /**
- * <P>Una implementación base de <code>ICommand</code> que ejecuta otros <code>ICommand</code>s.</P>
+ * Una implementación base de <code>ICommand que ejecuta otros ICommands.
  *
- * <P>Un <code>MacroCommand</code> mantiene una lista de
- * referencias de clase <code>ICommand</code> llamadas <i>SubCommands</i>.</P>
+ * Un MacroCommand mantiene una lista de
+ * referencias de clase ICommand llamadas SubCommands.
  *
- * <P>Cuando se llama a <code>execute</code>, el <code>MacroCommand</code>
- * instancia y llama a <code>execute</code> en cada uno de sus <i>SubCommands</i> en turno.
- * A cada <i>SubCommand</i> se le pasará una referencia a la <code>INotification</code> original
- * que se pasó al método <code>execute</code> del <code>MacroCommand</code>.</P>
+ * Cuando se llama a execute, el MacroCommand
+ * instancia y llama a execute en cada uno de sus SubCommands en turno.
+ * A cada SubCommand se le pasará una referencia a la INotification original
+ * que se pasó al método execute del MacroCommand.
  *
- * <P>A diferencia de <code>SimpleCommand</code>, su subclase
- * no debe anular <code>execute</code>, sino que debe
- * anular el método <code>initializeMacroCommand</code>,
- * llamando a <code>addSubCommand</code> una vez por cada <i>SubCommand</i>
- * que se va a ejecutar.</P>
+ * A diferencia de SimpleCommand, su subclase
+ * no debe anular <code>execute, sino que debe
+ * anular el método initializeMacroCommand,
+ * llamando a addSubCommand una vez por cada SubCommand
+ * que se va a ejecutar.
  *
  * @see org.puremvc.java.multicore.core.Controller Controlador
  * @see org.puremvc.java.multicore.patterns.observer.Notification Notificación
@@ -41,13 +41,13 @@ public class MacroCommand extends Notifier implements ICommand {
     private Vector<Supplier<ICommand>> subCommands;
 
     /**
-     * <P>Constructor.</P>
+     * Constructor.
      *
-     * <P>No deberías necesitar definir un constructor,
-     * en su lugar, anula el método <code>initializeMacroCommand</code>.</P>
+     * No deberías necesitar definir un constructor,
+     * en su lugar, anula el método initializeMacroCommand.
      *
-     * <P>Si tu subclase define un constructor, asegúrate
-     * de llamar a <code>super()</code>.</P>
+     * Si tu subclase define un constructor, asegúrate
+     * de llamar a <code>super()
      */
 
     public MacroCommand() {
@@ -56,12 +56,12 @@ public class MacroCommand extends Notifier implements ICommand {
     }
 
     /**
-     * <P>Inicializa el <code>MacroCommand</code>.</P>
+     * Inicializa el MacroCommand.
      *
-     * <P>En tu subclase, anula este método para
-     * inicializar la lista de <i>SubCommand</i>s del <code>MacroCommand</code>
-     * con referencias de clase <code>ICommand</code> como
-     * esta:</P>
+     * En tu subclase, anula este método para
+     * inicializar la lista de SubCommands del MacroCommand
+     * con referencias de clase ICommand como
+     * esta:
      *
      * <pre>
      * {@code // Inicializa MyMacroCommand
@@ -74,19 +74,19 @@ public class MacroCommand extends Notifier implements ICommand {
      * }
      * </pre>
      *
-     * <P>Ten en cuenta que los <i>SubCommand</i>s pueden ser cualquier implementador de <code>ICommand</code>,
-     * tanto <code>MacroCommand</code>s como <code>SimpleCommands</code> son aceptables.</P>
+     * Ten en cuenta que los SubCommands pueden ser cualquier implementador de ICommand,
+     * tanto MacroCommands como SimpleCommands son aceptables.
      */
 
     protected void initializeMacroCommand() {
     }
 
     /**
-     * <P>Agrega un <i>SubCommand</i>.</P>
+     * Agrega un SubCommand.
      *
-     * <P>Los <i>SubCommands</i> se llamarán en orden de Primero en Entrar/Primero en Salir (FIFO).</P>
+     * Los SubCommands se llamarán en orden de Primero en Entrar/Primero en Salir (FIFO).
      *
-     * @param factory una referencia a la fábrica del <code>ICommand</code>.
+     *  factory una referencia a la fábrica del ICommand
      */
 
     protected void addSubCommand(Supplier<ICommand> factory) {
@@ -94,16 +94,28 @@ public class MacroCommand extends Notifier implements ICommand {
     }
 
     /**
-     * <P>Ejecuta los <i>SubCommands</i> de este <code>MacroCommand</code>.</P>
+     * Ejecuta los SubCommands de este MacroCommand.
      *
-     * <P>Los <i>SubCommands</i> se llamarán en orden de Primero en Entrar/Primero en Salir (FIFO).</P>
+     * Los SubCommands se llamarán en orden de Primero en Entrar/Primero en Salir.
+     * ICommand command = subCommands.remove(0).get(); Aquí se extrae el primer comando
+     * de la lista subCommands y se guarda en la variable command.
+     * La llamada a remove(0) elimina el primer elemento de la lista y get()
+     * devuelve el comando almacenado en ese elemento.
      *
-     * @param notification el objeto <code>INotification</code> que se pasará a cada <i>SubCommand</i>.
+     * command.initializeNotifier(multitonKey);: Este método se llama para inicializar el comando
+     * con el multitonKey de la aplicación. El multitonKey es una clave única que identifica la instancia
+     * de la aplicación en el patrón PureMVC
+     *
+     * command.execute(notification);: Finalmente, se ejecuta el comando llamando a su método execute
+     * y pasándole la notificación recibida como argumento. La notificación contiene información
+     * sobre el evento que desencadenó la ejecución del comando.
+     *
+     * @param notification el objeto INotification que se pasará a cada SubCommand.
      */
 
     public void execute(INotification notification) {
         while(!subCommands.isEmpty()) {
-            ICommand command = subCommands.remove(0).get();
+             ICommand command = subCommands.remove(0).get();
             command.initializeNotifier(multitonKey);
             command.execute(notification);
         }

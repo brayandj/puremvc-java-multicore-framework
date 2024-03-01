@@ -39,8 +39,8 @@ public class Observer implements IObserver {
     /**
      * <P>Constructor.</P>
      *
-     * <P>El método de notificación en el objeto interesado debería tomar
-     * un parámetro de tipo <code>INotification</code></P>
+     * El método de notificación en el objeto interesado debería tomar
+     * un parámetro de tipo INotification
      *
      * @param notifyMethod el método de notificación del objeto interesado
      * @param notifyContext el contexto de notificación del objeto interesado
@@ -51,7 +51,7 @@ public class Observer implements IObserver {
     }
 
     /**
-     * <P>Compara un objeto con el contexto de notificación.</P>
+     * Compara un objeto con el contexto de notificación.
      *
      * @param object el objeto a comparar
      * @return booleano que indica si el objeto y el contexto de notificación son el mismo
@@ -61,9 +61,9 @@ public class Observer implements IObserver {
     }
 
     /**
-     * <P>Notifica al objeto interesado.</P>
+     * Notifica al objeto interesado.
      *
-     * @param notification la <code>INotification</code> para pasar al método de notificación del objeto interesado.
+     * @param notification la INotification para pasar al método de notificación del objeto interesado.
      */
     public void notifyObserver(INotification notification) {
         notify.accept(notification);
