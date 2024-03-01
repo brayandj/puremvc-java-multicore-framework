@@ -15,7 +15,7 @@ import java.util.Vector;
 import java.util.function.Supplier;
 
 /**
- * Una implementación base de <code>ICommand que ejecuta otros ICommands.
+ * Una implementación base de ICommand que ejecuta otros ICommands.
  *
  * Un MacroCommand mantiene una lista de
  * referencias de clase ICommand llamadas SubCommands.

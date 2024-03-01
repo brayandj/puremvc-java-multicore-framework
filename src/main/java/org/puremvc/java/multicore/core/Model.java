@@ -17,28 +17,29 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
 
 /**
- * <P>Una implementación <code>IModel</code> de Multiton.</P>
+ * Una implementación Multiton de IModel.
  *
- * <P>En PureMVC, la clase <code>Model</code> proporciona
- * acceso a objetos modelo (Proxies) mediante búsqueda con nombre.</P>
+ * En PureMVC, la clase Model proporciona acceso a objetos modelo (Proxies)
+ * mediante búsqueda con nombre.
  *
- * <P>El <code>Modelo</code> asume estas responsabilidades:</P>
+ * El Modelo asume estas responsabilidades:
  *
- * <UL>
- * <LI>Mantener un caché de instancias de <code>IProxy</code>.</LI>
- * <LI>Proporcionar métodos para registrar, recuperar y eliminar
- * Instancias <code>IProxy</code>.</LI>
- * </UL>
+ * - Mantener un caché de instancias de IProxy.
+ * - Proporcionar métodos para registrar, recuperar y eliminar instancias IProxy.
  *
- * <P>Su aplicación debe registrar instancias <code>IProxy</code>
- * con el <código>Modelo</código>. Normalmente se utiliza un
- * <code>ICommand</code> para crear y registrar <code>IProxy</code>
- * instancias una vez que <code>Fachada</code> ha inicializado el Núcleo
- * actores.</p>
+ * Tu aplicación debe registrar instancias IProxy con el Modelo.
+ * Normalmente se utiliza un ICommand para crear y registrar instancias IProxy
+ * una vez que Fachada ha inicializado el Núcleo actores.
  *
- * @see org.puremvc.java.multicore.patterns.proxy.Proxy Proxy
- * @see org.puremvc.java.multicore.interfaces.IProxy IProxy
+ * @see Proxy
+ * @see IProxy
  */
+
+import java.util.Map;
+import java.util.HashMap;
+import java.util.function.Function;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Model implements IModel {
 
@@ -48,24 +49,24 @@ public class Model implements IModel {
     // Asignación de proxyNames a instancias IProxy
     protected ConcurrentMap<String, IProxy> proxyMap;
 
-    // El Modelo Multiton instanceMap.
+    // El Mapa de instancias Multiton de Model
     protected static Map<String, IModel> instanceMap = new HashMap<>();
 
     // Constantes de mensaje
-    protected final String MULTITON_MSG = "Model instance for this Multiton key already constructed!";
+    protected final String MULTITON_MSG = "La instancia Model para esta clave Multiton ya fue construida!";
 
     /**
-     * <P>Constructor.</P>
+     * Constructor.
      *
-     * <P>Esta implementación <code>IModel</code> es un Multiton,
-     * entonces no deberías llamar al constructor
-     * directamente, pero en su lugar llama al Multiton estático</P>
-     *
-     * Método de fábrica {@code Model.getInstance(multitonKey, () -> nuevo Modelo(multitonKey))}
+     * Esta implementación IModel es un Multiton,
+     * así que no deberías llamar al constructor
+     * directamente, sino llamar al método Factory
+     * estático Model.getInstance(multitonKey, () -> new Model(multitonKey))
      *
      * @param key multitonKey
-     * @throws Error Error si la instancia para esta clave Multiton ya se ha construido
+     * @throws Error si ya existe una instancia para esta llave Multiton
      */
+
     public Model(String key) {
         if(instanceMap.get(key) != null) throw new Error(MULTITON_MSG);
         multitonKey = key;
@@ -75,23 +76,24 @@ public class Model implements IModel {
     }
 
     /**
-     * <P>Inicializa la instancia de <code>Model</code>.</P>
+     * Inicializa la instancia Model.
      *
-     * <P>Llamado automáticamente por el constructor, esto
-     * es tu oportunidad de inicializar el Singleton
-     * instancia en su subclase sin anular el
-     * constructor.</P>
+     * Llamado automáticamente por el constructor,
+     * esto es tu oportunidad de inicializar la instancia
+     * Singleton en tu subclase sin anular el constructor.
      */
+
     protected void initializeModel() {
     }
 
     /**
-     * <P><code>Modelo</code>Método Multiton Factory.</P>
+     * Método Factory Multiton de Model.
      *
      * @param key multitonKey
-     * @param factory una fábrica que acepta la clave y devuelve <code>IModel</code>
-     * @return la instancia Multiton de <code>Model</code>
+     * @param factory una función que acepta la llave y retorna un IModel
+     * @return la instancia Multiton de Model
      */
+
     public synchronized static IModel getInstance(String key, Function<String, IModel> factory) {
         if(instanceMap.get(key) == null) {
             instanceMap.put(key, factory.apply(key));
@@ -100,10 +102,11 @@ public class Model implements IModel {
     }
 
     /**
-     * <P>Registra un <code>IProxy</code> con el <code>Model</code>.</P>
+     * Registra un IProxy con el Model.
      *
-     * @param proxy un <code>IProxy</code> que será retenido por el <code>Model</code>.
+     * @param proxy un IProxy que será retenido por el Model.
      */
+
     public void registerProxy(IProxy proxy) {
         proxy.initializeNotifier(multitonKey);
         proxyMap.put(proxy.getProxyName(), proxy);
@@ -111,31 +114,34 @@ public class Model implements IModel {
     }
 
     /**
-     * <P>Recuperar un <code>IProxy</code> del <code>Model</code>.</P>
+     * Recupera un IProxy del Model.
      *
      * @param proxyName nombre del proxy
-     * @return la instancia <code>IProxy</code> registrada previamente con el <code>proxyName</code> dado.
+     * @return la instancia IProxy registrada previamente con el proxyName dado.
      */
+
     public IProxy retrieveProxy(String proxyName) {
         return proxyMap.get(proxyName);
     }
 
     /**
-     * <P>Comprueba si hay un Proxy registrado</P>
+     * Comprueba si hay un Proxy registrado
      *
      * @param proxyName nombre del proxy
-     * @return si un Proxy está actualmente registrado con el <code>proxyName</code> dado.
+     * @return si un Proxy está actualmente registrado con el proxyName dado.
      */
+
     public boolean hasProxy(String proxyName) {
         return proxyMap.containsKey(proxyName);
     }
 
     /**
-     * <P>Eliminar un <code>IProxy</code> del <code>Model</code>.</P>
+     * Elimina un IProxy del Model.
      *
-     * @param proxyName nombre de la instancia <code>IProxy</code> que se eliminará.
-     * @return el <code>IProxy</code> que se eliminó del <code>Model</code>
+     * @param proxyName nombre de la instancia IProxy a eliminar.
+     * @return el IProxy eliminado del Model
      */
+
     public IProxy removeProxy(String proxyName) {
         IProxy proxy = proxyMap.get(proxyName);
         if(proxy != null) {
@@ -146,10 +152,11 @@ public class Model implements IModel {
     }
 
     /**
-     * <P>Eliminar una instancia de IModel</P>
+     * Elimina una instancia IModel
      *
-     * Clave @param de la instancia de IModel para eliminar
+     * @param key de la instancia IModel a eliminar
      */
+
     public synchronized static void removeModel(String key) {
         instanceMap.remove(key);
     }

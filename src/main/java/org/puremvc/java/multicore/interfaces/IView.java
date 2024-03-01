@@ -8,20 +8,20 @@
 package org.puremvc.java.multicore.interfaces;
 
 /**
- * <P>La definición de interfaz para una Vista PureMVC.</P>
+ * La definición de interfaz para una Vista PureMVC.
  *
- * <P>En PureMVC, los implementadores de <code>IView</code> asumen estas responsabilidades:</P>
+ * En PureMVC, los implementadores de IView asumen estas responsabilidades:
  *
- * <P>En PureMVC, la clase <code>View</code> asume estas responsabilidades:</P>
+ * En PureMVC, la clase View asume estas responsabilidades:
  *
- * <UL>
- * <LI>Mantener una caché de instancias de <code>IMediator</code>.</LI>
- * <LI>Proporcionar métodos para registrar, recuperar y eliminar <code>IMediators</code>.</LI>
- * <LI>Administrar las listas de observadores para cada <code>INotification</code> en la aplicación.</LI>
- * <LI>Proporcionar un método para adjuntar <code>IObservers</code> a la lista de observadores de una <code>INotification</code>.</LI>
- * <LI>Proporcionar un método para transmitir una <code>INotification</code>.</LI>
- * <LI>Notificar a los <code>IObservers</code> de una <code>INotification</code> dada cuando se transmite.</LI>
- * </UL>
+ *
+ * Mantener una caché de instancias de IMediator.
+ * Proporcionar métodos para registrar, recuperar y eliminar IMediators.
+ * Administrar las listas de observadores para cada INotification en la aplicación.
+ * Proporcionar un método para adjuntar IObservers a la lista de observadores de una INotification.
+ * Proporcionar un método para transmitir una INotification.
+ * Notificar a los IObservers de una INotification dada cuando se transmite.
+ *
  *
  * @see org.puremvc.java.multicore.interfaces.IMediator IMediator
  * @see org.puremvc.java.multicore.interfaces.IObserver IObserver
@@ -31,17 +31,16 @@ package org.puremvc.java.multicore.interfaces;
 public interface IView {
 
     /**
-     * <P>Registra un <code>IObserver</code> para ser notificado
-     * de <code>INotifications</code> con un nombre dado.</P>
+     * Registra un IObserver para ser notificado de INotifications de con un nombre dado.
      *
-     * @param notificationName el nombre de las <code>INotifications</code> para notificar a este <code>IObserver</code>
-     * @param observer el <code>IObserver</code> para registrar
+     * @param notificationName el nombre de las INotifications para notificar a este IObserver
+     * @param observer el IObserver para registrar
      */
 
     void registerObserver(String notificationName, IObserver observer);
 
     /**
-     * <P>Elimina un grupo de observadores de la lista de observadores para un nombre de notificación dado.</P>
+     * Elimina un grupo de observadores de la lista de observadores para un nombre de notificación dado.
      *
      * @param notificationName qué lista de observadores eliminar
      * @param notifyContext elimina los observadores con este objeto como su notifyContext
@@ -50,29 +49,28 @@ public interface IView {
     void removeObserver(String notificationName, Object notifyContext);
 
     /**
-     * <P>Notifica a los <code>IObservers</code> para una <code>INotification</code> particular.</P>
+     * Notifica a los IObservers para una INotification particular.
      *
-     * <P>Todos los <code>IObservers</code> previamente adjuntos para esta lista de <code>INotification</code>
-     * son notificados y se les pasa una referencia a la <code>INotification</code> en
-     * el orden en que fueron registrados.</P>
+     * Todos los IObservers previamente adjuntos para esta lista de INotification
+     * son notificados y se les pasa una referencia a la INotification> en
+     * el orden en que fueron registrados.
      *
-     * @param notification la <code>INotification</code> para notificar a los <code>IObservers</code>.
+     * @param notification la INotification para notificar a los IObservers.
      */
 
     void notifyObservers(INotification notification);
 
     /**
-     * <P>Registra una instancia de <code>IMediator</code> con la <code>Vista</code>.</P>
+     * Registra una instancia de IMediator con la Vista.
      *
-     * <P>Registra el <code>IMediator</code> para que pueda ser recuperado por nombre,
-     * e interroga aún más al <code>IMediator</code> por sus
-     * intereses de <code>INotification</code>.</P>
+     * Registra el IMediator para que pueda ser recuperado por nombre,
+     * e interroga aún más al IMediator por sus intereses de INotification.
      *
-     * <P>Si el <code>IMediator</code> devuelve algún nombre de <code>INotification</code>
-     * para ser notificado, se crea un <code>Observer</code> encapsulando
-     * el método <code>handleNotification</code> del <code>IMediator</code>
-     * y registrándolo como un <code>Observer</code> para todas las <code>INotifications</code> que el
-     * <code>IMediator</code> está interesado en.</P>
+     * Si el IMediator devuelve algún nombre de INotification
+     * para ser notificado, se crea un Observer encapsulando
+     * el método handleNotification del IMediator
+     * y registrándolo como un Observer para todas las INotifications que el
+     * IMediator está interesado en.
      *
      * @param mediator una referencia a la instancia de <code>IMediator</code>
      */
@@ -80,28 +78,28 @@ public interface IView {
     void registerMediator(IMediator mediator);
 
     /**
-     * <P>Recupera un <code>IMediator</code> de la <code>Vista</code>.</P>
+     * Recupera un IMediator de la Vista.
      *
-     * @param mediatorName el nombre de la instancia de <code>IMediator</code> para recuperar.
-     * @return la instancia de <code>IMediator</code> previamente registrada con el <code>mediatorName</code> dado.
+     * @param mediatorName el nombre de la instancia de IMediator para recuperar.
+     * @return la instancia de IMediator previamente registrada con el mediatorName dado.
      */
 
     IMediator retrieveMediator(String mediatorName);
 
     /**
-     * <P>Elimina un <code>IMediator</code> de la <code>Vista</code>.</P>
+     * Elimina un IMediator de la Vista.
      *
-     * @param mediatorName nombre de la instancia de <code>IMediator</code> que se va a eliminar.
-     * @return el <code>IMediator</code> que se eliminó de la <code>Vista</code>
+     * @param mediatorName nombre de la instancia de IMediator que se va a eliminar.
+     * @return el IMediator que se eliminó de la Vista
      */
 
     IMediator removeMediator(String mediatorName);
 
     /**
-     * <P>Comprueba si un Mediator está registrado o no</P>
+     * Comprueba si un Mediator está registrado o no
      *
      * @param mediatorName nombre del mediador
-     * @return si un Mediator está registrado con el <code>mediatorName</code> dado.
+     * @return si un Mediator está registrado con el mediatorName dado.
      */
 
     boolean hasMediator(String mediatorName);
