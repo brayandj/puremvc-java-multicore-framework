@@ -10,15 +10,13 @@ package org.puremvc.java.multicore.interfaces;
 import java.util.function.Supplier;
 
 /**
- * <P>La definición de interfaz para una fachada PureMVC.</P>
+ * La interfaz para una Fachada PureMVC.
  *
- * <P>El patrón de fachada sugiere proporcionar una sola
- * clase para actuar como un punto central de comunicación
- * para un subsistema. </P>
+ * El patrón Fachada sugiere proporcionar una única clase para
+ * actuar como punto central de comunicación para un subsistema.
  *
- * <P>En PureMVC, la fachada actúa como una interfaz entre
- * los actores principales de MVC (Modelo, Vista, Controlador) y
- * el resto de su aplicación.</P>
+ * En PureMVC, la Fachada actúa como interfaz entre los actores
+ * principales de MVC (Modelo, Vista, Controlador) y el resto de tu aplicación.
  *
  * @see IModel IModel
  * @see IView IView
@@ -30,110 +28,108 @@ import java.util.function.Supplier;
 public interface IFacade extends INotifier {
 
     /**
-     * <P>Registrar un <code>IProxy</code> con el <code>Model</code> por nombre.</P>
+     * Registra un IProxy con el Model por nombre.
      *
-     * @param proxy el <code>IProxy</code> que se registrará con el <code>Model</code>.
+     * @param proxy el IProxy que se registrará con el Model.
      */
 
     void registerProxy(IProxy proxy);
 
     /**
-     * <P>Recuperar un <code>IProxy</code> del <code>Model</code> por nombre.</P>
+     * Recupera un IProxy del Model por nombre.
      *
-     * @param proxyName el nombre de la instancia <code>IProxy</code> que se recuperará.
-     * @return el <code>IProxy</code> previamente registrado por <code>proxyName</code> con el <code>Model</code>.
+     * @param proxyName el nombre de la instancia IProxy a recuperar.
+     * @return el IProxy registrado previamente con ese nombre en el Model.
      */
+
     IProxy retrieveProxy(String proxyName);
 
     /**
-     * <P>Eliminar una instancia <code>IProxy</code> del <code>Model</code> por nombre.</P>
+     * Elimina una instancia IProxy del Model por nombre.
      *
-     * @param proxyName el <code>IProxy</code> a eliminar del <code>Model</code>.
-     * @return el <code>IProxy</code> que se eliminó del <code>Model</code>
+     * @param proxyName el IProxy a eliminar del Model.
+     * @return el IProxy eliminado del Model
      */
 
     IProxy removeProxy(String proxyName);
 
     /**
-     * <P>Comprobar si un Proxy está registrado</P>
+     * Verifica si un Proxy está registrado
      *
-     * @param proxyName nombre del proxy
-     * @return si un Proxy está actualmente registrado con el <code>proxyName</code> dado.
+     * @param proxyName nombre del Proxy
+     * @return si el Proxy está registrado con ese nombre
      */
+
     boolean hasProxy(String proxyName);
 
     /**
-     * <P>Registrar un <code>ICommand</code> con el <code>Controller</code>.</P>
+     * Registra un ICommand con el Controller.
      *
-     * @param notificationName el nombre de la <code>INotification</code> para asociar el <code>ICommand</code> con.
-     * @param commandSupplier una referencia al proveedor de <code>ICommand</code>
+     * @param notificationName el nombre de la INotification a asociar el ICommand
+     * @param commandSupplier una referencia al proveedor de ICommand
      */
 
     void registerCommand(String notificationName, Supplier<ICommand> commandSupplier);
 
     /**
-     * <P>Eliminar un mapeo de <code>ICommand</code> previamente registrado a <code>INotification</code> del Controller.</P>
+     * Elimina el mapeo de ICommand a INotification del Controller.
      *
-     * @param notificationName el nombre de la <code>INotification</code> para eliminar el mapeo de <code>ICommand</code>
+     * @param notificationName la INotification para eliminar el mapeo
      */
 
     void removeCommand(String notificationName);
 
     /**
-     * <P>Compruebe si hay un Command registrado para una Notificación dada</P>
+     * Verifica si hay un ICommand registrado para una INotification
      *
      * @param notificationName nombre de la notificación
-     * @return si hay un Command actualmente registrado para el <code>notificationName</code> dado.
+     * @return si hay un ICommand registrado para esa notificación
      */
 
     boolean hasCommand(String notificationName);
 
     /**
-     * <P>Registre una instancia de <code>IMediator</code> con la <code>Vista</code>.</P>
+     * Registra una instancia IMediator con la Vista.
      *
-     * @param mediator una referencia a la instancia de <code>IMediator</code>
+     * @param mediator referencia a la instancia IMediator
      */
 
     void registerMediator(IMediator mediator);
 
     /**
-     * <P>Recupere una instancia de <code>IMediator</code> de la <code>Vista</code>.</P>
+     * Recupera una instancia IMediator de la Vista por nombre.
      *
-     * @param mediatorName el nombre de la instancia de <code>IMediator</code> para recuperar
-     * @return el <code>IMediator</code> previamente registrado con el <code>mediatorName</code> dado.
+     * @param mediatorName nombre de la instancia IMediator
+     * @return la IMediator registrada con ese nombre
      */
 
     IMediator retrieveMediator(String mediatorName);
 
     /**
-     * <P>Elimina una instancia de <code>IMediator</code> de la <code>Vista</code>.</P>
+     * Elimina una instancia IMediator de la Vista.
      *
-     * @param mediatorName el nombre de la instancia de <code>IMediator</code> a eliminar.
-     * @return la instancia de <code>IMediator</code> previamente registrada con el <code>mediatorName</code> dado.
+     * @param mediatorName nombre de la IMediator a eliminar
+     * @return la IMediator eliminada
      */
 
     IMediator removeMediator(String mediatorName);
 
     /**
-     * <P>Comprueba si un Mediator está registrado o no</P>
+     * Verifica si un Mediator está registrado
      *
      * @param mediatorName nombre del Mediator
-     * @return si un Mediator está registrado con el <code>mediatorName</code> dado.
+     * @return si está registrado
      */
 
     boolean hasMediator(String mediatorName);
 
     /**
-     * <P>Notifica a los <code>Observer</code>s.</P>
+     * Notifica a los Observers.
      *
-     * <P>Este método se deja público principalmente para compatibilidad con versiones anteriores,
-     * y para permitirle enviar clases de notificación personalizadas utilizando el facade.</P>
+     * Este método se deja público principalmente por compatibilidad,
+     * generalmente sólo debe llamar a sendNotification y pasar los parámetros.
      *
-     * <P>Por lo general, solo debe llamar a sendNotification y pasar los parámetros, sin tener que
-     * construir la notificación usted mismo.</P>
-     *
-     * @param notification la <code>INotification</code> para que la <code>View</code> notifique a los <code>Observers</code>.
+     * @param notification la INotification con la que la Vista notificará a los Observers.
      */
-
     void notifyObservers(INotification notification);
 }

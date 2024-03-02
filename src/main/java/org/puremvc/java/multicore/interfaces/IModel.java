@@ -8,51 +8,48 @@
 package org.puremvc.java.multicore.interfaces;
 
 /**
- * <P>Definición de la interfaz para un Modelo PureMVC.</P>
+ * Definición de la interfaz para un Modelo PureMVC.
  *
- * <P>En PureMVC, los implementadores de <code>IModel</code> proporcionan
- * acceso a objetos <code>IProxy</code> mediante búsqueda por nombre.</P>
+ * En PureMVC, los implementadores de IModel proporcionan acceso a objetos IProxy
+ * mediante búsqueda por nombre.
  *
- * <P>Un <code>IModel</code> asume estas responsabilidades:</P>
+ * Un IModel asume estas responsabilidades:
  *
- * <UL>
- * <LI>Mantener una caché de instancias de <code>IProxy</code></LI>
- * <LI>Proporcionar métodos para registrar, recuperar y eliminar instancias de <code>IProxy</code></LI>
- * </UL>
+ * - Mantener una caché de instancias de IProxy
+ *
+ * - Proporcionar métodos para registrar, recuperar y eliminar instancias de IProxy
+ *
  */
-
 public interface IModel {
 
     /**
-     * <P>Registrar una instancia de <code>IProxy</code> con el <code>Model</code>.</P>
+     * Registrar una instancia de IProxy con el Model.
      *
-     * @param proxy una referencia de objeto que será mantenida por el <code>Model</code>.
+     * @param proxy una referencia de objeto que será mantenida por el Model.
      */
     void registerProxy(IProxy proxy);
 
     /**
-     * <P>Recuperar una instancia de <code>IProxy</code> del Modelo.</P>
+     * Recuperar una instancia de IProxy del Modelo.
      *
      * @param proxyName nombre del proxy
-     * @return la instancia de <code>IProxy</code> previamente registrada con el <code>proxyName</code> dado.
+     * @return la instancia de IProxy previamente registrada con el proxyName dado.
      */
-
     IProxy retrieveProxy(String proxyName);
 
     /**
-     * <P>Eliminar una instancia de <code>IProxy</code> del Modelo.</P>
+     * Eliminar una instancia de IProxy del Modelo.
      *
-     * @param proxyName nombre de la instancia de <code>IProxy</code> a eliminar.
-     * @return el <code>IProxy</code> que fue eliminado del <code>Model</code>
+     * @param proxyName nombre de la instancia de IProxy a eliminar.
+     * @return el IProxy que fue eliminado del Model
      */
-
     IProxy removeProxy(String proxyName);
 
     /**
-     * <P>Verificar si un Proxy está registrado</P>
+     * Verificar si un Proxy está registrado
      *
      * @param proxyName nombre del proxy
-     * @return si un Proxy está actualmente registrado con el <code>proxyName</code> dado.
+     * @return si un Proxy está actualmente registrado con el proxyName dado.
      */
     boolean hasProxy(String proxyName);
 }

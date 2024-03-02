@@ -19,7 +19,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
- * Una implementación base Multiton de <code>IFacade</code>.
+ * Una implementación base Multiton de IFacade.
  *
  * @see org.puremvc.java.multicore.core.Model Model
  * @see org.puremvc.java.multicore.core.View View
@@ -42,14 +42,14 @@ public class Facade implements IFacade {
     protected final String MULTITON_MSG = "¡La instancia Facade para esta clave Multiton ya está construida!";
 
     /**
-     * <P>Constructor.</P>
-     *
-     * <P>Esta implementación de <code>IFacade</code> es un Multiton,
+     * Constructor.
+
+     * Esta implementación de IFacade es un Multiton,
      * así que no debería llamar al constructor
      * directamente, sino llamar al método Factory estático,
      * pasando la clave única para esta
-     * instancia <code>Facade.getInstance(multitonKey)</code></P>
-     *
+     * instancia Facade.getInstance(multitonKey)
+
      * @param key multitonKey
      * @throws Error Error si la instancia para esta clave Multiton ya se ha construido
      *
@@ -62,11 +62,11 @@ public class Facade implements IFacade {
     }
 
     /**
-     * <P>Inicializa la instancia Multiton de <code>Facade</code>.</P>
-     *
-     * <P>Llamado automáticamente por el constructor. Anula en su
+     * Inicializa la instancia Multiton de Facade.
+
+     * Llamado automáticamente por el constructor. Anula en su
      * subclase para hacer cualquier inicialización específica de la subclase.
-     * Asegúrese de llamar a <code>super.initializeFacade()</code>, también.</P>
+     * Asegúrese de llamar a super.initializeFacade(), también.
      */
     protected void initializeFacade() {
         initializeModel();
@@ -75,10 +75,10 @@ public class Facade implements IFacade {
     }
 
     /**
-     * <P>Método Factory Multiton de Facade</P>
-     *
+     * Método Factory Multiton de Facade
+
      * @param key multitonKey
-     * @param factory una factoría que acepta la clave y devuelve <code>IFacade</code>
+     * @param factory una factoría que acepta la clave y devuelve IFacade
      * @return la instancia Multiton de la Facade
      */
     public synchronized static IFacade getInstance(String key, Function<String, IFacade> factory) {
@@ -89,20 +89,18 @@ public class Facade implements IFacade {
     }
 
     /**
-     * <P>Inicializa el <code>Controller</code>.</P>
-     *
-     * <P>Llamado por el método <code>initializeFacade</code>.
-     * Anula este método en su subclase de <code>Facade</code>
-     * si se cumple una o ambas de las siguientes condiciones:</P>
-     *
-     * <UL>
-     * <LI> Desea inicializar un <code>IController</code> diferente.</LI>
-     * <LI> Tiene <code>Commands</code> para registrar con el <code>Controller</code> en el arranque. </LI>
-     * </UL>
-     *
-     * <P>Si no desea inicializar un <code>IController</code> diferente,
-     * llame a <code>super.initializeController()</code> al principio de su
-     * método, luego registre <code>Commands</code>.</P>
+     * Inicializa el Controller.
+
+     * Llamado por el método initializeFacade.
+     * Anula este método en su subclase de Facade
+     * si se cumple una o ambas de las siguientes condiciones:
+
+     * - Desea inicializar un IController diferente.
+     * - Tiene Commands para registrar con el Controller en el arranque.
+
+     * Si no desea inicializar un IController diferente,
+     * llame a super.initializeController() al principio de su
+     * método, luego registre Commands.
      */
     protected void initializeController() {
         if(controller != null) return;
@@ -110,27 +108,25 @@ public class Facade implements IFacade {
     }
 
     /**
-     * <P>Inicializar el <code>Model</code>.</P>
-     *
-     * <P>Llamado por el método <code>initializeFacade</code>.
-     * Anule este método en su subclase de <code>Facade</code>
-     * si se cumple una o ambas de las siguientes condiciones:</P>
-     *
-     * <UL>
-     * <LI> Desea inicializar un <code>IModel</code> diferente.</LI>
-     * <LI> Tiene <code>Proxy</code> para registrar con el Modelo que no
-     * recuperan una referencia a la Fachada en tiempo de construcción.</LI>
-     * </UL>
-     *
-     * <P>Si no desea inicializar un <code>IModel</code> diferente,
-     * llame a <code>super.initializeModel()</code> al principio de su
-     * método, luego registre <code>Proxy</code>.</P>
-     *
-     * <P>Nota: Este método rara vez se anula; en la práctica es más
-     * probable que use un <code>Command</code> para crear y registrar <code>Proxy</code>
-     * con el <code>Model</code>, ya que los <code>Proxy</code> con datos mutables probablemente
-     * necesitan enviar <code>INotification</code> y por lo tanto probablemente querrán buscar una referencia a
-     * el <code>Facade</code> durante su construcción.</P>
+     * Inicializar el Model.
+
+     * Llamado por el método initializeFacade.
+     * Anule este método en su subclase de Facade
+     * si se cumple una o ambas de las siguientes condiciones:
+
+     * - Desea inicializar un IModel diferente.
+     * - Tiene Proxy para registrar con el Modelo que no
+     * recuperan una referencia a la Fachada en tiempo de construcción.
+
+     * Si no desea inicializar un IModel diferente,
+     * llame a super.initializeModel() al principio de su
+     * método, luego registre Proxy.
+
+     * Nota: Este método rara vez se anula; en la práctica es más
+     * probable que use un Command para crear y registrar Proxy
+     * con el Model, ya que los Proxy con datos mutables probablemente
+     * necesitan enviar INotification y por lo tanto probablemente querrán buscar una referencia a
+     * el Facade durante su construcción.
      */
     protected void initializeModel() {
         if(model != null) return;
@@ -138,26 +134,24 @@ public class Facade implements IFacade {
     }
 
     /**
-     * <P>Inicializa la <code>View</code>.</P>
-     *
-     * <P>Llamado por el método <code>initializeFacade</code>.
-     * Anule este método en su subclase de <code>Facade</code>
-     * si se cumple una o ambas de las siguientes condiciones:</P>
-     *
-     * <UL>
-     * <LI> Desea inicializar una <code>IView</code> diferente.</LI>
-     * <LI> Tiene <code>Observers</code> para registrar con la <code>View</code></LI>
-     * </UL>
-     *
-     * <P>Si no desea inicializar una <code>IView</code> diferente,
-     * llame a <code>super.initializeView()</code> al principio de su
-     * método, luego registre instancias de <code>IMediator</code>.</P>
-     *
-     * <P>Nota: Este método rara vez se anula; en la práctica es más
-     * probable que use un <code>Command</code> para crear y registrar <code>Mediator</code>
-     * con la <code>View</code>, ya que las instancias de <code>IMediator</code> necesitarán enviar
-     * <code>INotification</code> y por lo tanto probablemente querrán buscar una referencia
-     * al <code>Facade</code> durante su construcción.</P>
+     * Inicializa la View.
+
+     * Llamado por el método initializeFacade.
+     * Anule este método en su subclase de Facade
+     * si se cumple una o ambas de las siguientes condiciones:
+
+     * - Desea inicializar una IView diferente.
+     * - Tiene Observers para registrar con la View
+
+     * Si no desea inicializar una IView diferente,
+     * llame a super.initializeView() al principio de su
+     * método, luego registre instancias de IMediator.
+
+     * Nota: Este método rara vez se anula; en la práctica es más
+     * probable que use un Command para crear y registrar Mediator
+     * con la View, ya que las instancias de IMediator necesitarán enviar
+     * INotification y por lo tanto probablemente querrán buscar una referencia
+     * al Facade durante su construcción.
      */
     protected void initializeView() {
         if(view != null) return;
@@ -165,118 +159,118 @@ public class Facade implements IFacade {
     }
 
     /**
-     * <P>Registre un <code>ICommand</code> con el <code>Controller</code> por nombre de notificación.</P>
-     *
-     * @param notificationName el nombre de la <code>INotification</code> para asociar el <code>ICommand</code>
-     * @param controllerSupplier proveedor que devuelve <code>IController</code>
+     * Registre un ICommand con el Controller por nombre de notificación.
+
+     * @param notificationName el nombre de la INotification para asociar el ICommand
+     * @param controllerSupplier proveedor que devuelve IController
      */
     public void registerCommand(String notificationName, Supplier<ICommand> controllerSupplier) {
         controller.registerCommand(notificationName, controllerSupplier);
     }
 
     /**
-     * <P>Eliminar una asignación <code>ICommand</code> a <code>INotification</code> previamente registrada del Controller.</P>
-     *
-     * @param notificationName el nombre de la <code>INotification</code> para eliminar la asignación <code>ICommand</code>
+     * Eliminar una asignación ICommand a INotification previamente registrada del Controller.
+
+     * @param notificationName el nombre de la INotification para eliminar la asignación ICommand
      */
     public void removeCommand(String notificationName) {
         controller.removeCommand(notificationName);
     }
 
     /**
-     * <P>Comprobar si un Comando está registrado para una Notificación dada</P>
-     *
+     * Comprobar si un Comando está registrado para una Notificación dada
+
      * @param notificationName nombre de la notificación
-     * @return si hay un Comando registrado actualmente para el <code>notificationName</code> dado.
+     * @return si hay un Comando registrado actualmente para el notificationName dado.
      */
     public boolean hasCommand(String notificationName) {
         return controller.hasCommand(notificationName);
     }
 
     /**
-     * <P>Registre un <code>IProxy</code> con el <code>Model</code> por nombre.</P>
-     *
-     * @param proxy la instancia <code>IProxy</code> que se registrará con el <code>Model</code>.
+     * Registre un IProxy con el Model por nombre.
+
+     * @param proxy la instancia IProxy que se registrará con el Model.
      */
     public void registerProxy(IProxy proxy) {
         model.registerProxy(proxy);
     }
 
     /**
-     * <P>Recuperar un <code>IProxy</code> del <code>Model</code> por nombre.</P>
-     *
+     * Recuperar un IProxy del Model por nombre.
+
      * @param proxyName el nombre del proxy que se recuperará.
-     * @return la instancia <code>IProxy</code> registrada anteriormente con el <code>proxyName</code> dado.
+     * @return la instancia IProxy registrada anteriormente con el proxyName dado.
      */
     public IProxy retrieveProxy(String proxyName) {
         return model.retrieveProxy(proxyName);
     }
 
     /**
-     * <P>Eliminar un <code>IProxy</code> del <code>Model</code> por nombre.</P>
-     *
-     * @param proxyName el <code>IProxy</code> para eliminar del <code>Model</code>.
-     * @return el <code>IProxy</code> que se eliminó del <code>Model</code>
+     * Eliminar un IProxy del Model por nombre.
+
+     * @param proxyName el IProxy para eliminar del Model.
+     * @return el IProxy que se eliminó del Model
      */
     public IProxy removeProxy(String proxyName) {
         return model.removeProxy(proxyName);
     }
 
     /**
-     * <P>Comprobar si un Proxy está registrado</P>
-     *
+     * Comprobar si un Proxy está registrado
+
      * @param proxyName nombre del proxy
-     * @return si hay un Proxy registrado actualmente con el <code>proxyName</code> dado.
+     * @return si hay un Proxy registrado actualmente con el proxyName dado.
      */
     public boolean hasProxy(String proxyName) {
         return model.hasProxy(proxyName);
     }
 
     /**
-     * <P>Registre un <code>IMediator</code> con la <code>View</code>.</P>
-     *
-     * @param mediator una referencia al <code>IMediator</code>
+     * Registre un IMediator con la View.
+
+     * @param mediator una referencia al IMediator
      */
     public void registerMediator(IMediator mediator) {
         view.registerMediator(mediator);
     }
 
     /**
-     * <P>Recuperar un <code>IMediator</code> de la <code>View</code>.</P>
-     *
+     * Recuperar un IMediator de la View.
+
      * @param mediatorName nombre del mediador
-     * @return el <code>IMediator</code> registrado anteriormente con el <code>mediatorName</code> dado.
+     * @return el IMediator registrado anteriormente con el mediatorName dado.
      */
     public IMediator retrieveMediator(String mediatorName) {
         return view.retrieveMediator(mediatorName);
     }
 
     /**
-     * <P>Eliminar un <code>IMediator</code> de la <code>View</code>.</P>
-     *
-     * @param mediatorName nombre del <code>IMediator</code> que se eliminará.
-     * @return el <code>IMediator</code> que se eliminó de la <code>View</code>
+     * Eliminar un IMediator de la View.
+
+     * @param mediatorName nombre del IMediator que se eliminará.
+     * @return el IMediator que se eliminó de la View
      */
     public IMediator removeMediator(String mediatorName) {
         return view.removeMediator(mediatorName);
     }
 
     /**
-     * <P>Comprobar si un Mediador está registrado o no</P>
-     *
+     * Comprobar si un Mediador está registrado o no
+
      * @param mediatorName nombre del mediador
-     * @return si hay un Mediador registrado con el <code>mediatorName</code> dado.
+     * @return si hay un Mediador registrado con el mediatorName dado.
      */
     public boolean hasMediator(String mediatorName) {
         return view.hasMediator(mediatorName);
     }
 
     /**
-     * <P>Crear y enviar una <code>INotification</code>.</P>
-     *
-     * <P>Nos evita tener que construir nuevas instancias de notificación
-     * en nuestro código de implementación.</P>
-     *
+     * Crear y enviar una INotification.
+
+     * Nos evita tener que construir nuevas instancias de notificación
+     * en nuestro código de implementación.
+
      * @param notificationName el nombre de la notificación que se enviará
      * @param body el cuerpo de la notificación
      * @param type el tipo de la notificación
@@ -286,11 +280,11 @@ public class Facade implements IFacade {
     }
 
     /**
-     * <P>Crear y enviar una <code>INotification</code>.</P>
-     *
-     * <P>Nos evita tener que construir nuevas instancias de notificación
-     * en nuestro código de implementación.</P>
-     *
+     * Crear y enviar una INotification.
+
+     * Nos evita tener que construir nuevas instancias de notificación
+     * en nuestro código de implementación.
+
      * @param notificationName el nombre de la notificación que se enviará
      * @param body el cuerpo de la notificación
      */
@@ -299,11 +293,11 @@ public class Facade implements IFacade {
     }
 
     /**
-     * <P>Crear y enviar una <code>INotification</code>.</P>
-     *
-     * <P>Nos evita tener que construir nuevas instancias de notificación
-     * en nuestro código de implementación.</P>
-     *
+     * Crear y enviar una INotification.
+
+     * Nos evita tener que construir nuevas instancias de notificación
+     * en nuestro código de implementación.
+
      * @param notificationName el nombre de la notificación que se enviará
      */
     public void sendNotification(String notificationName) {
@@ -311,50 +305,50 @@ public class Facade implements IFacade {
     }
 
     /**
-     * <P>Notificar a los <code>Observer</code>.</P>
-     *
-     * <P>Este método se deja público principalmente por
+     * Notificar a los Observer.
+
+     * Este método se deja público principalmente por
      * compatibilidad hacia atrás, y para permitirle enviar clases
-     * de notificación personalizadas usando la fachada.</P>
-     *
-     * <P>Por lo general, solo debe llamar a sendNotification
+     * de notificación personalizadas usando la fachada.
+
+     * Por lo general, solo debe llamar a sendNotification
      * y pasar los parámetros, sin tener que
-     * construir la notificación usted mismo.</P>
-     *
-     * @param notification la <code>INotification</code> que la <code>View</code> notificará a los <code>Observers</code>.
+     * construir la notificación usted mismo.
+
+     * @param notification la INotification que la View notificará a los Observers.
      */
     public void notifyObservers(INotification notification) {
         view.notifyObservers(notification);
     }
 
     /**
-     * <P>Establece la clave Multiton para esta instancia de fachada.</P>
-     *
-     * <P>No se llama directamente, sino desde el
+     * Establece la clave Multiton para esta instancia de fachada.
+
+     * No se llama directamente, sino desde el
      * constructor cuando se invoca getInstance.
      * Es necesario que sea público para
-     * implementar INotifier.</P>
+     * implementar INotifier.
      */
     public void initializeNotifier(String key) {
         multitonKey = key;
     }
 
     /**
-     * <P>Comprobar si un Core está registrado o no</P>
-     *
+     * Comprobar si un Core está registrado o no
+
      * @param key la clave multiton para el Core en cuestión
-     * @return si hay un Core registrado con la <code>key</code> dada.
+     * @return si hay un Core registrado con la key dada.
      */
     public static synchronized boolean hasCore(String key) {
         return instanceMap.containsKey(key);
     }
 
     /**
-     * <P>Eliminar un Core.</P>
-     *
-     * <P>Elimina las instancias Model, View, Controller y Facade
-     * para la clave dada.</P>
-     *
+     * Eliminar un Core.
+
+     * Elimina las instancias Model, View, Controller y Facade
+     * para la clave dada.
+
      * @param key del Core a eliminar
      */
     public static synchronized void removeCore(String key) {

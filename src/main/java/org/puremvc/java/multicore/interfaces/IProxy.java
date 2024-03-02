@@ -8,57 +8,57 @@
 package org.puremvc.java.multicore.interfaces;
 
 /**
- * <P>La definición de interfaz para un Proxy de PureMVC.</P>
+ * La definición de interfaz para un Proxy de PureMVC.
  *
- * <P>En PureMVC, los implementadores de <code>IProxy</code> asumen estas responsabilidades:</P>
+ * En PureMVC, los implementadores de IProxy asumen estas responsabilidades:
  *
- * <UL>
- * <LI>Implementar un método común que devuelva el nombre del Proxy.</LI>
- * <LI>Proporcionar métodos para establecer y obtener el objeto de datos.</LI>
- * </UL>
+ * - Implementar un método común que devuelva el nombre del Proxy.
  *
- * <P>Además, los <code>IProxy</code> típicamente:</P>
+ * - Proporcionar métodos para establecer y obtener el objeto de datos.
  *
- * <UL>
- * <LI>Mantienen referencias a uno o más fragmentos de datos del modelo.</LI>
- * <LI>Proporcionan métodos para manipular esos datos.</LI>
- * <LI>Generan <code>INotifications</code> cuando sus datos de modelo cambian.</LI>
- * <LI>Exponen su nombre como una <code>public static const</code> llamada <code>NAME</code>, si no se instancian varias veces.</LI>
- * <LI>Encapsulan la interacción con servicios locales o remotos utilizados para recuperar y persistir datos del modelo.</LI>
- * </UL>
+ * Además, los IProxy típicamente:
+ *
+ * - Mantienen referencias a uno o más fragmentos de datos del modelo.
+ *
+ * - Proporcionan métodos para manipular esos datos.
+ *
+ * - Generan INotifications cuando sus datos de modelo cambian.
+ *
+ * - Exponen su nombre como una public static const llamada NAME, si no se instancian varias veces.
+ *
+ * - Encapsulan la interacción con servicios locales o remotos utilizados para recuperar y persistir datos del modelo.
+ *
  */
-
 public interface IProxy extends INotifier {
 
     /**
-     * <P>Obtener el nombre del Proxy</P>
+     * Obtener el nombre del Proxy
      *
      * @return el nombre de la instancia del Proxy
      */
     String getProxyName();
 
     /**
-     * <P>Establecer el objeto de datos</P>
+     * Establecer el objeto de datos
      *
      * @param data el objeto de datos
      */
     void setData(Object data);
 
     /**
-     * <P>Obtener el objeto de datos</P>
+     * Obtener el objeto de datos
      *
      * @return los datos como tipo Object
      */
     Object getData();
 
     /**
-     * <P>Llamado por el Modelo cuando el Proxy está registrado</P>
+     * Llamado por el Modelo cuando el Proxy está registrado
      */
-
     void onRegister();
 
     /**
-     * <P>Llamado por el Modelo cuando el Proxy es removido</P>
+     * Llamado por el Modelo cuando el Proxy es removido
      */
     void onRemove();
 }
