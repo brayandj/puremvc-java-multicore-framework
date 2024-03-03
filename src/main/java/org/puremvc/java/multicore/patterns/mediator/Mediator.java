@@ -1,7 +1,6 @@
-//
 //  PureMVC Java Multicore
 //
-//  Copyright(c) 2019 Saad Shams <saad.shams@puremvc.org>
+//  Copyright(c) 2019 Saad Shams saad.shams@puremvc.org
 //  Your reuse is governed by the Creative Commons Attribution 3.0 License
 //
 
@@ -12,7 +11,7 @@ import org.puremvc.java.multicore.interfaces.INotification;
 import org.puremvc.java.multicore.patterns.observer.Notifier;
 
 /**
- * <P>Una implementación base de <code>IMediator</code>.</P>
+ * Una implementación base de IMediator.
  *
  * @see org.puremvc.java.multicore.core.View View
  */
@@ -20,11 +19,11 @@ import org.puremvc.java.multicore.patterns.observer.Notifier;
 public class Mediator extends Notifier implements IMediator {
 
     /**
-     * <P>El nombre del <code>Mediator</code>.</P>
+     * El nombre del Mediator.
      *
-     * <P>Típicamente, un <code>Mediator</code> se escribirá para servir
+     * Típicamente, un Mediator se escribirá para servir
      * a un control específico o grupo de controles y, por lo tanto,
-     * no tendrá la necesidad de ser nombrado dinámicamente.</P>
+     * no tendrá la necesidad de ser nombrado dinámicamente.
      */
 
     public static final String NAME = "Mediator"; // el nombre del mediador
@@ -34,7 +33,7 @@ public class Mediator extends Notifier implements IMediator {
     protected Object viewComponent;
 
     /**
-     * <P>Constructor.</P>
+     * Constructor.
      *
      * @param mediatorName nombre del mediador
      * @param viewComponent componente de vista
@@ -49,7 +48,7 @@ public class Mediator extends Notifier implements IMediator {
     }
 
     /**
-     * <P>Constructor.</P>
+     * Constructor.
      *
      * @param mediatorName nombre del mediador
      */
@@ -61,7 +60,7 @@ public class Mediator extends Notifier implements IMediator {
     }
 
     /**
-     * <P>Constructor.</P>
+     * Constructor.
      */
 
     public Mediator() {
@@ -71,10 +70,10 @@ public class Mediator extends Notifier implements IMediator {
     }
 
     /**
-     * <P>Lista los nombres de <code>INotification</code> en los que este
-     * <code>Mediator</code> está interesado en ser notificado.</P>
+     * Lista los nombres de INotification en los que este
+     * Mediator está interesado en ser notificado.
      *
-     * @return Array la lista de nombres de <code>INotification</code>
+     * @return Array la lista de nombres de INotification
      */
 
     public String[] listNotificationInterests() {
@@ -84,11 +83,11 @@ public class Mediator extends Notifier implements IMediator {
     }
 
     /**
-     * <P>Maneja las <code>INotification</code>s.</P>
+     * Maneja las INotifications.
      *
-     * <P>Típicamente esto se manejará en una sentencia switch,
-     * con una entrada 'case' por cada <code>INotification</code>
-     * en la que el <code>Mediator</code> está interesado.</P>
+     * Típicamente esto se manejará en una sentencia switch,
+     * con una entrada 'case' por cada INotification
+     * en la que el Mediator está interesado.
      */
 
     public void handleNotification(INotification notification) {
@@ -96,7 +95,7 @@ public class Mediator extends Notifier implements IMediator {
     }
 
     /**
-     * <P>Llamado por la Vista cuando el Mediator se registra</P>
+     * Llamado por la Vista cuando el Mediator se registra
      */
 
     public void onRegister() {
@@ -104,7 +103,7 @@ public class Mediator extends Notifier implements IMediator {
     }
 
     /**
-     * <P>Llamado por la Vista cuando el Mediator se elimina</P>
+     * Llamado por la Vista cuando el Mediator se elimina
      */
 
     public void onRemove() {
@@ -112,7 +111,7 @@ public class Mediator extends Notifier implements IMediator {
     }
 
     /**
-     * <P>Obtener el nombre del <code>Mediator</code>.</P>
+     * Obtener el nombre del Mediator.
      *
      * @return el nombre del Mediator
      */
@@ -124,15 +123,13 @@ public class Mediator extends Notifier implements IMediator {
     }
 
     /**
-     * <P>Obtener el componente de vista del <code>Mediator</code>.</P>
+     * Obtener el componente de vista del Mediator.
      *
-     * <P>Adicionalmente, generalmente se definirá un getter implícito
-     * en la subclase que convierte el objeto vista en un tipo, como esto:</P>
+     * Adicionalmente, generalmente se definirá un getter implícito
+     * en la subclase que convierte el objeto vista en un tipo, como esto:
      *
-     * {@code
      * public javax.swing.JComboBox getViewComponent() {
      *   return viewComponent;
-     * }
      * }
      *
      * @return el componente de vista
@@ -145,7 +142,7 @@ public class Mediator extends Notifier implements IMediator {
     }
 
     /**
-     * <P>Establece el componente de vista del <code>IMediator</code>.</P>
+     * Establece el componente de vista del IMediator.
      *
      * @param viewComponent el componente de vista
      */
