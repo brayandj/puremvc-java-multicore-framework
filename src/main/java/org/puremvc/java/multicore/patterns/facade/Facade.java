@@ -19,7 +19,27 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
+ * El código que se muestra es una implementación de la clase Facade que sigue el patrón de diseño PureMVC (Puremvc, Multicore).
+ * Esta clase representa la fachada del patrón y tiene la responsabilidad de orquestar la comunicación
+ * entre los diferentes componentes del patrón: Model, View y Controller
+ * Esta implementación de Facade está diseñada para facilitar el desarrollo de aplicaciones modulares y escalables,
+ * siguiendo los principios del patrón PureMVC.
+ *
+ * Cada "núcleo" o módulo de la aplicación tendría su propia instancia de Facade y sus componentes asociados,
+ * lo que permite un mejor aislamiento y organización del código.
+ *
+ * Además, al utilizar el concepto de "Multiton", se permite la creación de múltiples instancias de Facade y sus componentes,
+ * lo que puede ser útil en aplicaciones grandes o cuando se necesita aislar diferentes partes de la lógica de la aplicación.
+ *
+ *
  * Una implementación base Multiton de IFacade.
+ * Multiton: Esta implementación de Facade utiliza el concepto de "Multiton",
+ * que es una variación del patrón Singleton.
+ * En lugar de tener una única instancia de Facade,
+ * se permite tener múltiples instancias identificadas por una clave única (multitonKey).
+ * Esto permite que una aplicación tenga múltiples "núcleos" o módulos independientes,
+ * cada uno con su propia instancia de Facade y sus componentes asociados (Model, View y Controller).
+ *
  *
  * @see org.puremvc.java.multicore.core.Model Model
  * @see org.puremvc.java.multicore.core.View View
@@ -46,9 +66,17 @@ public class Facade implements IFacade {
 
      * Esta implementación de IFacade es un Multiton,
      * así que no debería llamar al constructor
-     * directamente, sino llamar al método Factory estático,
+     * directamente, sino llamar al método Factory estático getInstance,
+     * que actúa como un "Factory Method" para
+     * obtener una instancia de Facade asociada a una clave específica (multitonKey).
      * pasando la clave única para esta
      * instancia Facade.getInstance(multitonKey)
+     *
+     * ejemplo:
+     * desde la clase que desea inicializar esta instancia Facade debe elegir el nombre del multitonKey
+     * y posteriormente obtener la instancia de Facade para que inicie la orquestación de los componentes de la aplicación.
+     * String multitonKey = "miAplicacion";
+     * IFacade facade = Facade.getInstance(multitonKey, key -> new Facade(key));
 
      * @param key multitonKey
      * @throws Error Error si la instancia para esta clave Multiton ya se ha construido

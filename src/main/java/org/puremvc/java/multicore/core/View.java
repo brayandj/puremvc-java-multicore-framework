@@ -93,8 +93,10 @@ public class View implements IView {
      * Inicializa la instancia Singleton de View.
      *
      * Llamado automáticamente por el constructor,
-     * esto es tu oportunidad de inicializar la instancia
+     * esta es tu oportunidad de inicializar la instancia
      * Singleton en tu subclase sin anular el constructor.
+     * Si una subclase anula este método, el código de inicialización personalizado
+     * se ejecutará después de que se complete la inicialización de la clase base.
      */
 
     protected void initializeView() {
