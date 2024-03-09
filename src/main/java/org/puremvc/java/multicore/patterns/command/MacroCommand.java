@@ -57,7 +57,7 @@ public class MacroCommand extends Notifier implements ICommand {
 
     public MacroCommand() {
         subCommands = new Vector<Supplier<ICommand>>();
-        initializeMacroCommand();
+         initializeMacroCommand();
     }
 
     /**

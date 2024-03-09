@@ -12,30 +12,30 @@ import org.puremvc.java.multicore.interfaces.INotifier;
 import org.puremvc.java.multicore.patterns.facade.Facade;
 
 /**
- * <P>Una implementación base de <code>INotifier</code>.</P>
+ * Una implementación base de INotifier
  *
- * <P><code>MacroCommand, Command, Mediator</code> y <code>Proxy</code>
- * todos tienen la necesidad de enviar <code>Notifications</code>.</P>
+ * MacroCommand, Command, Mediator y Proxy
+ * todos tienen la necesidad de enviar Notifications.
  *
- * <P>La interfaz <code>INotifier</code> proporciona un método común llamado
- * <code>sendNotification</code> que libera al código de implementación de
- * la necesidad de construir realmente instancias de <code>Notifications</code>.</P>
+ * La interfaz INotifier proporciona un método común llamado
+ * sendNotification que libera al código de implementación de
+ * la necesidad de construir realmente instancias de Notifications.
  *
- * <P>La clase <code>Notifier</code>, de la cual todas las clases mencionadas anteriormente
- * extienden, proporciona una referencia inicializada al <code>Facade</code>
+ * La clase Notifier, de la cual todas las clases mencionadas anteriormente
+ * extienden, proporciona una referencia inicializada al Facade
  * Multiton, que es necesario para el método de conveniencia
- * para enviar <code>Notifications</code>, pero también facilita la implementación ya que estas
- * clases tienen interacciones frecuentes con <code>Facade</code> y generalmente requieren
- * acceso a la fachada de todos modos.</P>
+ * para enviar Notifications, pero también facilita la implementación ya que estas
+ * clases tienen interacciones frecuentes con Facade y generalmente requieren
+ * acceso a la fachada de todos modos.
  *
- * <P>NOTA: En la versión MultiCore del framework, hay una salvedad para
+ * NOTA: En la versión MultiCore del framework, hay una salvedad para
  * los notificadores, no pueden enviar notificaciones ni alcanzar la fachada hasta que
- * tengan una clave multiton válida.</P>
+ * tengan una clave multiton válida.
  *
- * <P>La multitonKey se establece:
+ * La multitonKey se establece:
  *   * en un Command cuando es ejecutado por el Controller
  *   * en un Mediator cuando se registra con la Vista
- *   * en un Proxy cuando se registra con el Model.</P>
+ *   * en un Proxy cuando se registra con el Model.
  *
  * @see org.puremvc.java.multicore.patterns.proxy.Proxy Proxy
  * @see Facade Facade

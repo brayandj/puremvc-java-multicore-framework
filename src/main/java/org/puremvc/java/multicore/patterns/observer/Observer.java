@@ -15,18 +15,16 @@ import java.util.function.Consumer;
 /**
  * <P>Una implementación base de <code>IObserver</code>.</P>
  *
- * <P>Un <code>Observer</code> es un objeto que encapsula información
+ * Un Observer es un objeto que encapsula información
  * sobre un objeto interesado con un método que debería
- * ser llamado cuando se transmita una <code>INotification</code> en particular.</P>
+ * ser llamado cuando se transmita una INotification en particular.
  *
- * <P>En PureMVC, la clase <code>Observer</code> asume estas responsabilidades:</P>
+ * En PureMVC, la clase Observer asume estas responsabilidades:
  *
- * <UL>
- * <LI>Encapsular el método de notificación (callback) del objeto interesado.</LI>
- * <LI>Encapsular el contexto de notificación (this) del objeto interesado.</LI>
- * <LI>Proporcionar métodos para establecer el método de notificación y el contexto.</LI>
- * <LI>Proporcionar un método para notificar al objeto interesado.</LI>
- * </UL>
+ * Encapsular el método de notificación (callback) del objeto interesado.
+ * Encapsular el contexto de notificación (this) del objeto interesado.
+ * Proporcionar métodos para establecer el método de notificación y el contexto.
+ * Proporcionar un método para notificar al objeto interesado.
  *
  * @see org.puremvc.java.multicore.core.View View
  * @see org.puremvc.java.multicore.patterns.observer.Notification Notification
@@ -37,7 +35,7 @@ public class Observer implements IObserver {
     private Consumer<INotification> notify;
 
     /**
-     * <P>Constructor.</P>
+     * Constructor.
      *
      * El método de notificación en el objeto interesado debería tomar
      * un parámetro de tipo INotification
